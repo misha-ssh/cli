@@ -6,7 +6,7 @@ require (
 	github.com/charmbracelet/lipgloss v1.0.0
 	github.com/erikgeiser/promptkit v0.9.0
 	github.com/muesli/termenv v0.15.2
-	github.com/spf13/cobra v1.8.1
+	github.com/spf13/cobra v1.9.1
 	github.com/ssh-connection-manager/kernel/v2 v2.2.1
 )
 
