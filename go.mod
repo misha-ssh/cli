@@ -5,7 +5,7 @@ go 1.22.10
 require (
 	github.com/charmbracelet/lipgloss v1.0.0
 	github.com/erikgeiser/promptkit v0.9.0
-	github.com/muesli/termenv v0.15.2
+	github.com/muesli/termenv v0.16.0
 	github.com/spf13/cobra v1.8.1
 	github.com/ssh-connection-manager/kernel/v2 v2.2.1
 )
@@ -45,7 +45,7 @@ require (
 	go.uber.org/multierr v1.11.0 // indirect
 	golang.org/x/exp v0.0.0-20250128182459-e0ece0dbea4c // indirect
 	golang.org/x/sync v0.10.0 // indirect
-	golang.org/x/sys v0.29.0 // indirect
+	golang.org/x/sys v0.30.0 // indirect
 	golang.org/x/term v0.28.0 // indirect
 	golang.org/x/text v0.21.0 // indirect
 	gopkg.in/ini.v1 v1.67.0 // indirect
