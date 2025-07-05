@@ -1,15 +1,20 @@
-package view
+package selection
 
 import (
-	"github.com/ssh-connection-manager/kernel/v2/pkg/output"
 	"strconv"
 	"strings"
 
 	"github.com/erikgeiser/promptkit/selection"
 	"github.com/muesli/termenv"
+	"github.com/ssh-connection-manager/kernel/v2/pkg/output"
 )
 
-type Select struct {
+const (
+	ResultChoiceName     = "alias"
+	ResultTemplateSelect = `{{- print .Prompt " " (Foreground "206"  (alias .FinalChoice)) "\n" -}}`
+)
+
+type Selection struct {
 	FilterPlaceholder string
 	SelectionPrompt   string
 	FilterPrompt      string
@@ -17,16 +22,16 @@ type Select struct {
 	PageSize          string
 }
 
-func (s Select) SelectedValue(aliases []string) (string, error) {
-	sp := selection.New(s.SelectionPrompt, aliases)
+func (c Selection) Select(aliases []string) (string, error) {
+	sp := selection.New(c.SelectionPrompt, aliases)
 
-	sp.FilterPlaceholder = " " + s.FilterPlaceholder
-	sp.FilterPrompt = s.FilterPrompt
-	sp.Template = s.Template
+	sp.FilterPlaceholder = " " + c.FilterPlaceholder
+	sp.FilterPrompt = c.FilterPrompt
+	sp.Template = c.Template
 
 	sp.ResultTemplate = ResultTemplateSelect
 
-	pageSize, err := strconv.Atoi(s.PageSize)
+	pageSize, err := strconv.Atoi(c.PageSize)
 
 	if err != nil {
 		output.GetOutError("err page size must be an integer")
@@ -45,7 +50,7 @@ func (s Select) SelectedValue(aliases []string) (string, error) {
 		return color.Bold().Styled(c.Value)
 	}
 
-	sp.ExtendedTemplateFuncs = map[string]interface{}{
+	sp.ExtendedTemplateFuncs = map[string]any{
 		ResultChoiceName: func(c *selection.Choice[string]) string { return c.Value },
 	}
 

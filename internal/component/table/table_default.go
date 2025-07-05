@@ -1,4 +1,4 @@
-package view
+package table
 
 import (
 	"os"
@@ -21,7 +21,7 @@ const (
 	CellWidth    = 1
 )
 
-func (t *Table) ViewTable(value [][]string, headers []string) *table.Table {
+func (t *Table) Display(value [][]string, headers []string) *table.Table {
 	render := lipgloss.NewRenderer(os.Stdout)
 
 	CellStyle := render.NewStyle().

@@ -1,23 +1,26 @@
-package view
+package input
 
 import (
-	"github.com/ssh-connection-manager/kernel/v2/pkg/output"
 	"slices"
 
 	"github.com/erikgeiser/promptkit/textinput"
 )
 
-type TextInput struct {
+const ResultTemplateTextInput = `
+{{- print .Prompt " " (Foreground "206"  (Mask .FinalValue)) "\n" -}}
+`
+
+type Input struct {
 	Arguments   [][]*string
 	HiddenArgs  []*string
 	Placeholder string
 }
 
-func (t TextInput) currentPlaceholder(name string) (string, error) {
+func (t Input) currentPlaceholder(name string) (string, error) {
 	return " " + name + t.Placeholder, nil
 }
 
-func (t TextInput) DrawInput() error {
+func (t Input) Read() error {
 	var input *textinput.TextInput
 	var err error
 
@@ -36,7 +39,6 @@ func (t TextInput) DrawInput() error {
 		*arg[1], err = input.RunPrompt()
 
 		if err != nil {
-			output.GetOutError("err run prompt this current args")
 			return err
 		}
 	}
