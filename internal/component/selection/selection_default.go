@@ -6,7 +6,6 @@ import (
 
 	"github.com/erikgeiser/promptkit/selection"
 	"github.com/muesli/termenv"
-	"github.com/ssh-connection-manager/kernel/v2/pkg/output"
 )
 
 const (
@@ -34,7 +33,6 @@ func (c Selection) Select(aliases []string) (string, error) {
 	pageSize, err := strconv.Atoi(c.PageSize)
 
 	if err != nil {
-		output.GetOutError("err page size must be an integer")
 		return "", err
 	}
 
@@ -57,7 +55,6 @@ func (c Selection) Select(aliases []string) (string, error) {
 	selectedValue, err := sp.RunPrompt()
 
 	if err != nil {
-		output.GetOutError("err running prompt")
 		return "", err
 	}
 
