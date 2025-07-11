@@ -1,6 +1,10 @@
 package command
 
 import (
+	"context"
+	"os"
+
+	"github.com/charmbracelet/fang"
 	"github.com/spf13/cobra"
 	"github.com/ssh-connection-manager/cli/configs/envconst"
 )
@@ -8,8 +12,9 @@ import (
 // Run Start app with cobra cmd
 func Run() {
 	app := &cobra.Command{
-		Use:  envconst.UseRootCmd,
-		Long: envconst.LongRootCmd,
+		Use:     envconst.UseRootCmd,
+		Long:    envconst.LongRootCmd,
+		Example: envconst.ExampleRootCmd,
 	}
 
 	// Disable default options cmd
@@ -21,7 +26,7 @@ func Run() {
 	app.AddCommand(listCmd)
 	app.AddCommand(updateCmd)
 
-	if err := app.Execute(); err != nil {
-		panic(err)
+	if err := fang.Execute(context.Background(), app); err != nil {
+		os.Exit(1)
 	}
 }

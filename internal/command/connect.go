@@ -1,7 +1,7 @@
 package command
 
 import (
-	"fmt"
+	"errors"
 
 	"github.com/spf13/cobra"
 	"github.com/ssh-connection-manager/cli/configs/envconst"
@@ -12,7 +12,7 @@ var connectCmd = &cobra.Command{
 	Use:   envconst.UseConnectCmd,
 	Short: envconst.ShortConnectCmd,
 	Long:  envconst.LongConnectCmd,
-	Run: func(cmd *cobra.Command, args []string) {
-		fmt.Println("connect called")
+	RunE: func(cmd *cobra.Command, args []string) error {
+		return errors.New("connect")
 	},
 }

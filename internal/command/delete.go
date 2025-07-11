@@ -1,7 +1,7 @@
 package command
 
 import (
-	"fmt"
+	"errors"
 
 	"github.com/spf13/cobra"
 	"github.com/ssh-connection-manager/cli/configs/envconst"
@@ -12,7 +12,7 @@ var deleteCmd = &cobra.Command{
 	Use:   envconst.UseDeleteCmd,
 	Short: envconst.ShortDeleteCmd,
 	Long:  envconst.LongDeleteCmd,
-	Run: func(cmd *cobra.Command, args []string) {
-		fmt.Println("delete called")
+	RunE: func(cmd *cobra.Command, args []string) error {
+		return errors.New("delete")
 	},
 }
