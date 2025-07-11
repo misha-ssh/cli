@@ -2,18 +2,17 @@ package envconst
 
 const (
 	// UseRootCmd App name and default name command
-	UseRootCmd = `ssh+`
+	UseRootCmd = `masha`
 
 	// LongRootCmd Long description root command
-	LongRootCmd = `
-This application allows you to create alias connections 
-and use them when you choose to connect to an ssh connection
+	LongRootCmd = `Masha is a connection management utility`
 
-To start, create a connection via:
--- ssh+ create
+	// ExampleRootCmd Example use command
+	ExampleRootCmd = `
+# Run it for create connection:
+masha create
 
-Once created, select your alias connection:
--- ssh+ connect
-
+# Before created choice new connection:
+masha connect
 `
 )
