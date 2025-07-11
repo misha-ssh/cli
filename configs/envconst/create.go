@@ -8,5 +8,8 @@ const (
 	ShortCreateCmd = `Creates a connection`
 
 	// LongCreateCmd Long description create command
-	LongCreateCmd = `This command creates connections, that you can reuse when connecting via ssh`
+	LongCreateCmd = `
+This command creates connections, 
+that you can reuse when connecting via ssh
+`
 )
