@@ -2,17 +2,17 @@ package envconst
 
 const (
 	// UseRootCmd App name and default name command
-	UseRootCmd = `masha`
+	UseRootCmd = `misha`
 
 	// LongRootCmd Long description root command
-	LongRootCmd = `Masha is a connection management utility`
+	LongRootCmd = `Misha is a connection management utility`
 
 	// ExampleRootCmd Example use command
 	ExampleRootCmd = `
 # Run it for create connection:
-masha create
+misha create
 
 # Before created choice new connection:
-masha connect
+misha connect
 `
 )
