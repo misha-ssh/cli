@@ -1,0 +1,18 @@
+package command
+
+import (
+	"fmt"
+
+	"github.com/spf13/cobra"
+	"github.com/ssh-connection-manager/cli/configs/envconst"
+)
+
+// connectCmd Command for connection by alias connect
+var connectCmd = &cobra.Command{
+	Use:   envconst.UseConnectCmd,
+	Short: envconst.ShortConnectCmd,
+	Long:  envconst.LongConnectCmd,
+	Run: func(cmd *cobra.Command, args []string) {
+		fmt.Println("connect called")
+	},
+}
