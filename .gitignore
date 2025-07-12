@@ -27,3 +27,5 @@ go.work.sum
 # Editor/IDE
 .idea/
 .vscode/
+
+cmd/misha/misha
