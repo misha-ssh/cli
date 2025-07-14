@@ -3,8 +3,8 @@ package command
 import (
 	"errors"
 
+	"github.com/misha-ssh/cli/configs/envconst"
 	"github.com/spf13/cobra"
-	"github.com/ssh-connection-manager/cli/configs/envconst"
 )
 
 // updateCmd Command for update connection

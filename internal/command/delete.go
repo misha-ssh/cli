@@ -9,8 +9,8 @@ import (
 	"strings"
 
 	"github.com/charmbracelet/lipgloss"
+	"github.com/misha-ssh/cli/configs/envconst"
 	"github.com/spf13/cobra"
-	"github.com/ssh-connection-manager/cli/configs/envconst"
 )
 
 var (

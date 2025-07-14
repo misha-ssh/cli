@@ -5,8 +5,8 @@ import (
 	"os"
 
 	"github.com/charmbracelet/fang"
+	"github.com/misha-ssh/cli/configs/envconst"
 	"github.com/spf13/cobra"
-	"github.com/ssh-connection-manager/cli/configs/envconst"
 )
 
 // Run Start app with cobra cmd

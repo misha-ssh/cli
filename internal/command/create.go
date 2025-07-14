@@ -2,9 +2,9 @@ package command
 
 import (
 	"fmt"
+	"github.com/misha-ssh/cli/configs/envconst"
+	"github.com/misha-ssh/cli/internal/component/input"
 	"github.com/spf13/cobra"
-	"github.com/ssh-connection-manager/cli/configs/envconst"
-	"github.com/ssh-connection-manager/cli/internal/component/input"
 )
 
 // createCmd Command for create connection
