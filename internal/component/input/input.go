@@ -27,6 +27,12 @@ var (
 	errInvalidModelType = errors.New("invalid model type")
 )
 
+const (
+	ChatLimit  = 32
+	Width      = 20
+	HiddenChar = '*'
+)
+
 type Fields struct {
 	Nickname string
 	Email    string
@@ -176,7 +182,8 @@ func initModel() model {
 	for i := range m.inputs {
 		t = textinput.New()
 		t.Cursor.Style = cursorStyle
-		t.CharLimit = 32
+		t.CharLimit = ChatLimit
+		t.Width = Width
 
 		switch i {
 		case 0:
@@ -190,7 +197,7 @@ func initModel() model {
 		case 2:
 			t.Placeholder = fileds.getNameByNumber(2)
 			t.EchoMode = textinput.EchoPassword
-			t.EchoCharacter = '*'
+			t.EchoCharacter = HiddenChar
 		}
 
 		m.inputs[i] = t
@@ -209,8 +216,6 @@ func Init() (*Fields, error) {
 	if !ok {
 		return nil, errInvalidModelType
 	}
-
-	fmt.Println(currentModel.inputs[0].Placeholder)
 
 	return &Fields{
 		Nickname: currentModel.inputs[0].Value(),
