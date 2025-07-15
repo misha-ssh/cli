@@ -4,6 +4,7 @@ import (
 	"errors"
 	"fmt"
 	"reflect"
+	"strconv"
 	"strings"
 
 	"github.com/charmbracelet/bubbles/cursor"
@@ -34,9 +35,11 @@ const (
 )
 
 type Fields struct {
-	Nickname string
-	Email    string
-	Password string
+	Alias      string
+	Login      string
+	Password   string
+	Port       int
+	PrivateKey string
 }
 
 func (f *Fields) count() int {
@@ -193,11 +196,14 @@ func initModel() model {
 			t.TextStyle = focusedStyle
 		case 1:
 			t.Placeholder = fileds.getNameByNumber(1)
-			t.CharLimit = 64
 		case 2:
 			t.Placeholder = fileds.getNameByNumber(2)
 			t.EchoMode = textinput.EchoPassword
 			t.EchoCharacter = HiddenChar
+		case 3:
+			t.Placeholder = fileds.getNameByNumber(3)
+		case 4:
+			t.Placeholder = fileds.getNameByNumber(4)
 		}
 
 		m.inputs[i] = t
@@ -217,9 +223,16 @@ func Init() (*Fields, error) {
 		return nil, errInvalidModelType
 	}
 
+	port, err := strconv.Atoi(currentModel.inputs[3].Value())
+	if err != nil {
+		return nil, err
+	}
+
 	return &Fields{
-		Nickname: currentModel.inputs[0].Value(),
-		Email:    currentModel.inputs[1].Value(),
-		Password: currentModel.inputs[2].Value(),
+		Alias:      currentModel.inputs[0].Value(),
+		Login:      currentModel.inputs[1].Value(),
+		Password:   currentModel.inputs[2].Value(),
+		Port:       port,
+		PrivateKey: currentModel.inputs[4].Value(),
 	}, nil
 }
