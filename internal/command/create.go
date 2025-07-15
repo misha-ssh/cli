@@ -16,7 +16,7 @@ var createCmd = &cobra.Command{
 	Short: envconst.ShortCreateCmd,
 	Long:  envconst.LongCreateCmd,
 	RunE: func(cmd *cobra.Command, _ []string) error {
-		fields, err := input.Init()
+		fields, err := input.Run()
 		if err != nil {
 			return err
 		}
