@@ -26,21 +26,15 @@ var (
 	blurredButton = fmt.Sprintf("[ %s ]", blurredStyle.Render("Submit"))
 )
 
-type (
-	errMsg error
-)
-
 type model struct {
 	focusIndex int
 	inputs     []textinput.Model
-	err        error
 }
 
 func initModel() model {
 	fileds := &Fields{}
 	m := model{
 		inputs: make([]textinput.Model, fileds.count()),
-		err:    nil,
 	}
 
 	var t textinput.Model
@@ -132,9 +126,6 @@ func (m model) Update(msg tea.Msg) (tea.Model, tea.Cmd) {
 		default:
 			return m.updateModel(msg)
 		}
-	case errMsg:
-		m.err = msg
-		return m, nil
 	}
 
 	return m.updateModel(msg)
@@ -145,6 +136,9 @@ func (m model) View() string {
 
 	for i := range m.inputs {
 		b.WriteString(m.inputs[i].View())
+		if m.inputs[i].Err != nil {
+			b.WriteString(fmt.Sprintf("\n%s", m.inputs[i].Err))
+		}
 		if i < len(m.inputs)-1 {
 			b.WriteRune('\n')
 		}
