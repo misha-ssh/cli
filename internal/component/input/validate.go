@@ -2,6 +2,7 @@ package input
 
 import (
 	"errors"
+	"os"
 	"strconv"
 )
 
@@ -21,4 +22,9 @@ func portValidate(s string) error {
 	}
 
 	return nil
+}
+
+func fileExistsValidate(filename string) error {
+	_, err := os.Stat(filename)
+	return err
 }
