@@ -8,10 +8,6 @@ import (
 	"github.com/charmbracelet/bubbles/filepicker"
 )
 
-type Fields struct {
-	PrivateKey string
-}
-
 func Run() *Fields {
 	fp := filepicker.New()
 	fp.CurrentDirectory, _ = os.UserHomeDir()
