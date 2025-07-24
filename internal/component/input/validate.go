@@ -17,7 +17,7 @@ const (
 var (
 	errPortIsNotString = errors.New("port is not string")
 	errPortRange       = errors.New("port from 1 to 65535")
-	errFileNotExist    = errors.New("file not exist")
+	errFileNotExist    = errors.New("file not exists")
 	errGetConnections  = errors.New("get connections error")
 	errAliasExists     = errors.New("alias exists")
 
