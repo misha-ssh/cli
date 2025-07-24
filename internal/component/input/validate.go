@@ -4,6 +4,7 @@ import (
 	"errors"
 	"os"
 	"strconv"
+	"strings"
 
 	"github.com/misha-ssh/kernel/pkg/connect"
 	"github.com/misha-ssh/kernel/pkg/kernel"
@@ -20,6 +21,7 @@ var (
 	errFileNotExist    = errors.New("file not exists")
 	errGetConnections  = errors.New("get connections error")
 	errAliasExists     = errors.New("alias exists")
+	errAliasIsNotEmpty = errors.New("alias is not empty")
 
 	preloadedConnections    *connect.Connections
 	errPreloadedConnections error
@@ -34,7 +36,11 @@ func init() {
 	preloadedConnections = connections
 }
 
-func aliasExistsValidate(alias string) error {
+func aliasValidate(alias string) error {
+	if strings.TrimSpace(alias) == "" || alias == "" {
+		return errAliasIsNotEmpty
+	}
+
 	if errPreloadedConnections != nil {
 		return errGetConnections
 	}
@@ -61,7 +67,7 @@ func portValidate(s string) error {
 	return nil
 }
 
-func fileExistsValidate(filename string) error {
+func fileValidate(filename string) error {
 	_, err := os.Stat(filename)
 	if err != nil {
 		return errFileNotExist
