@@ -9,6 +9,7 @@ import (
 var (
 	errPortIsNotString = errors.New("port is not string")
 	errPortRange       = errors.New("port from 1 to 65535")
+	errFileNotExist    = errors.New("file not exist")
 )
 
 func portValidate(s string) error {
@@ -26,5 +27,13 @@ func portValidate(s string) error {
 
 func fileExistsValidate(filename string) error {
 	_, err := os.Stat(filename)
-	return err
+	if err != nil {
+		return errFileNotExist
+	}
+
+	return nil
+}
+
+func aliasExistsValidate(alias string) error {
+	return nil
 }
