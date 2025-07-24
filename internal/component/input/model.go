@@ -51,24 +51,19 @@ func initModel() model {
 			t.Placeholder = fileds.getNameByNumber(fieldNumberAlias)
 			t.PromptStyle = focusedStyle
 			t.TextStyle = focusedStyle
-			//t.Prompt = lipgloss.NewStyle().Width(2).Render("🏷")
 		case fieldNumberLogin:
 			t.Placeholder = fileds.getNameByNumber(fieldNumberLogin)
-			//t.Prompt = lipgloss.NewStyle().Width(2).Render("👤")
 		case fieldNumberPassword:
 			t.Placeholder = fileds.getNameByNumber(fieldNumberPassword)
 			t.EchoMode = textinput.EchoPassword
 			t.EchoCharacter = HiddenChar
-			//t.Prompt = lipgloss.NewStyle().Width(2).Render("🔐")
 		case fieldNumberPort:
 			t.Placeholder = fileds.getNameByNumber(fieldNumberPort)
 			t.Validate = portValidate
-			//t.Prompt = lipgloss.NewStyle().Width(2).Render("🔌")
 		case fieldNumberPrivateKey:
 			t.Placeholder = fileds.getNameByNumber(fieldNumberPrivateKey) + " - " + "Press Ctrl+O to select the file"
 			t.CharLimit = ChatLimitPrivateKey
 			t.Validate = fileExistsValidate
-			//t.Prompt = lipgloss.NewStyle().Width(2).Render("🗝️")1
 		}
 
 		m.inputs[i] = t
