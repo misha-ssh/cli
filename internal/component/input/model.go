@@ -15,6 +15,9 @@ const (
 	ChatLimitPrivateKey = 1024
 	Width               = 200
 	HiddenChar          = '*'
+
+	DefaultPort           = "22"
+	TextCommandChoiceFile = "- Press Ctrl+O to select the file"
 )
 
 var (
@@ -51,6 +54,7 @@ func initModel() model {
 			t.Placeholder = fileds.getNameByNumber(fieldNumberAlias)
 			t.PromptStyle = focusedStyle
 			t.TextStyle = focusedStyle
+			t.Validate = aliasExistsValidate
 		case fieldNumberLogin:
 			t.Placeholder = fileds.getNameByNumber(fieldNumberLogin)
 		case fieldNumberPassword:
@@ -60,8 +64,9 @@ func initModel() model {
 		case fieldNumberPort:
 			t.Placeholder = fileds.getNameByNumber(fieldNumberPort)
 			t.Validate = portValidate
+			t.SetValue(DefaultPort)
 		case fieldNumberPrivateKey:
-			t.Placeholder = fileds.getNameByNumber(fieldNumberPrivateKey) + " - " + "Press Ctrl+O to select the file"
+			t.Placeholder = fileds.getNameByNumber(fieldNumberPrivateKey) + TextCommandChoiceFile
 			t.CharLimit = ChatLimitPrivateKey
 			t.Validate = fileExistsValidate
 		}
