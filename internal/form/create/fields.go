@@ -1,4 +1,4 @@
-package connection
+package create
 
 type Fields struct {
 	Alias      string

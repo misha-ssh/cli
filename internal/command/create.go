@@ -5,7 +5,7 @@ import (
 	"strconv"
 	"time"
 
-	contForm "github.com/misha-ssh/cli/internal/form/connection"
+	createForm "github.com/misha-ssh/cli/internal/form/create"
 
 	"github.com/misha-ssh/cli/configs/envconst"
 	"github.com/misha-ssh/kernel/pkg/connect"
@@ -16,16 +16,16 @@ import (
 var (
 	errRunTextInput     = errors.New("error run text input")
 	errConvertPort      = errors.New("error convert port")
-	errCreateConnection = errors.New("error create connection")
+	errCreateConnection = errors.New("error create create")
 )
 
-// createCmd Command for create connection
+// createCmd Command for create create
 var createCmd = &cobra.Command{
 	Use:   envconst.UseCreateCmd,
 	Short: envconst.ShortCreateCmd,
 	Long:  envconst.LongCreateCmd,
 	RunE: func(cmd *cobra.Command, _ []string) error {
-		fields, err := contForm.Input()
+		fields, err := createForm.Run()
 		if err != nil {
 			return errRunTextInput
 		}

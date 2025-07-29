@@ -1,4 +1,4 @@
-package connection
+package create
 
 import (
 	"os"
@@ -10,7 +10,7 @@ const (
 	DefaultPort = "22"
 )
 
-func Input() (*Fields, error) {
+func Run() (*Fields, error) {
 	homedir, err := os.UserHomeDir()
 	if err != nil {
 		return nil, err
