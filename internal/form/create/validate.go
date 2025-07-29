@@ -22,7 +22,6 @@ var (
 	errGetConnections  = errors.New("get connections error")
 	errAliasExists     = errors.New("alias exists")
 	errAliasIsNotEmpty = errors.New("alias is not empty")
-	errLoginIsNotEmpty = errors.New("login is not empty")
 
 	preloadedConnections    *connect.Connections
 	errPreloadedConnections error
@@ -52,20 +51,6 @@ func aliasValidate(alias string) error {
 		}
 	}
 
-	return nil
-}
-
-func loginValidate(login string) error {
-	if strings.TrimSpace(login) == "" || login == "" {
-		return errLoginIsNotEmpty
-	}
-	return nil
-}
-
-func passwordValidate(password string) error {
-	if strings.TrimSpace(password) == "" || password == "" {
-		return errLoginIsNotEmpty
-	}
 	return nil
 }
 

@@ -31,14 +31,14 @@ func Run() (*Fields, error) {
 			huh.NewInput().
 				Title("Login").
 				Description("Username of the remote machine").
-				Validate(loginValidate).
+				Validate(huh.ValidateNotEmpty()).
 				Value(&fields.Login),
 
 			huh.NewInput().
 				Title("Password").
 				EchoMode(huh.EchoModePassword).
 				Description("Password to connect to a remote machine").
-				Validate(passwordValidate).
+				Validate(huh.ValidateNotEmpty()).
 				Value(&fields.Password),
 
 			huh.NewInput().
