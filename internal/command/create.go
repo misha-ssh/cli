@@ -5,8 +5,9 @@ import (
 	"strconv"
 	"time"
 
+	contForm "github.com/misha-ssh/cli/internal/form/connection"
+
 	"github.com/misha-ssh/cli/configs/envconst"
-	"github.com/misha-ssh/cli/internal/component/textinput"
 	"github.com/misha-ssh/kernel/pkg/connect"
 	"github.com/misha-ssh/kernel/pkg/kernel"
 	"github.com/spf13/cobra"
@@ -24,7 +25,7 @@ var createCmd = &cobra.Command{
 	Short: envconst.ShortCreateCmd,
 	Long:  envconst.LongCreateCmd,
 	RunE: func(cmd *cobra.Command, _ []string) error {
-		fields, err := textinput.Run()
+		fields, err := contForm.Input()
 		if err != nil {
 			return errRunTextInput
 		}
