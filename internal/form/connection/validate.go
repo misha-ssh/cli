@@ -1,4 +1,4 @@
-package textinput
+package connection
 
 import (
 	"errors"

@@ -1,4 +1,4 @@
-package textinput
+package connection
 
 type Fields struct {
 	Alias      string

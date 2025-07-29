@@ -1,4 +1,4 @@
-package textinput
+package connection
 
 import (
 	"os"
@@ -10,7 +10,7 @@ const (
 	DefaultPort = "22"
 )
 
-func Run() (*Fields, error) {
+func Input() (*Fields, error) {
 	homedir, err := os.UserHomeDir()
 	if err != nil {
 		return nil, err
