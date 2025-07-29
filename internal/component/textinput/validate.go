@@ -1,4 +1,4 @@
-package input
+package textinput
 
 import (
 	"errors"
@@ -22,6 +22,7 @@ var (
 	errGetConnections  = errors.New("get connections error")
 	errAliasExists     = errors.New("alias exists")
 	errAliasIsNotEmpty = errors.New("alias is not empty")
+	errLoginIsNotEmpty = errors.New("login is not empty")
 
 	preloadedConnections    *connect.Connections
 	errPreloadedConnections error
@@ -54,6 +55,20 @@ func aliasValidate(alias string) error {
 	return nil
 }
 
+func loginValidate(login string) error {
+	if strings.TrimSpace(login) == "" || login == "" {
+		return errLoginIsNotEmpty
+	}
+	return nil
+}
+
+func passwordValidate(password string) error {
+	if strings.TrimSpace(password) == "" || password == "" {
+		return errLoginIsNotEmpty
+	}
+	return nil
+}
+
 func portValidate(s string) error {
 	port, err := strconv.Atoi(s)
 	if err != nil {
@@ -67,7 +82,7 @@ func portValidate(s string) error {
 	return nil
 }
 
-func fileValidate(filename string) error {
+func privateKeyValidate(filename string) error {
 	_, err := os.Stat(filename)
 	if err != nil {
 		return errFileNotExist
