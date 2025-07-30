@@ -68,6 +68,10 @@ func portValidate(s string) error {
 }
 
 func privateKeyValidate(filename string) error {
+	if strings.TrimSpace(filename) == "" || filename == "" {
+		return nil
+	}
+
 	_, err := os.Stat(filename)
 	if err != nil {
 		return errFileNotExist
