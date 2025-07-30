@@ -14,9 +14,8 @@ import (
 )
 
 var (
-	errRunTextInput     = errors.New("error run text input")
-	errConvertPort      = errors.New("error convert port")
-	errCreateConnection = errors.New("error create create")
+	errRunTextInput = errors.New("error run text input")
+	errConvertPort  = errors.New("error convert port")
 )
 
 // createCmd Command for create create
@@ -52,7 +51,7 @@ var createCmd = &cobra.Command{
 
 		err = kernel.Create(connection)
 		if err != nil {
-			return errCreateConnection
+			return err
 		}
 
 		return nil
