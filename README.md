@@ -8,7 +8,7 @@ and use them when selecting an ssh connection.
 ![GitHub issues](https://img.shields.io/github/issues/ssh-connection-manager/ssh-)
 
 ## Documentation
-User [documentation](https://ssh-connection-manager.github.io/docs/) is available at.
+User [documentation](https://misha-ssh.github.io/docs/) is available at.
 
 ## Installation
 
