@@ -16,6 +16,7 @@ const (
 var (
 	errGetHomeDir       = errors.New(`cannot get home directory`)
 	errCreateConnection = errors.New(`cannot create connection`)
+	errConvertPort      = errors.New(`cannot convert port`)
 )
 
 func Run(connection *connect.Connect) (*Fields, error) {
@@ -27,7 +28,7 @@ func Run(connection *connect.Connect) (*Fields, error) {
 	}
 
 	fields := &Fields{}
-	port := DefaultPort
+	port := strconv.Itoa(connection.SshOptions.Port)
 
 	err = huh.NewForm(
 		huh.NewGroup(
@@ -35,13 +36,13 @@ func Run(connection *connect.Connect) (*Fields, error) {
 				Title("Alias").
 				Description("Unique connection name").
 				Validate(aliasValidate).
-				Value(&fields.Alias),
+				Value(&connection.Alias),
 
 			huh.NewInput().
 				Title("Login").
 				Description("Username of the remote machine").
 				Validate(huh.ValidateNotEmpty()).
-				Value(&fields.Login),
+				Value(&connection.Login),
 
 			huh.NewInput().
 				Title("Port").
@@ -61,7 +62,7 @@ func Run(connection *connect.Connect) (*Fields, error) {
 				Title("Password").
 				EchoMode(huh.EchoModePassword).
 				Description("Password to connect to a remote machine").
-				Value(&fields.Password),
+				Value(&connection.Password),
 		).WithHideFunc(func() bool {
 			return !authPassConfirm
 		}),
@@ -71,7 +72,7 @@ func Run(connection *connect.Connect) (*Fields, error) {
 				Description("select file with private key").
 				CurrentDirectory(homedir).
 				Validate(privateKeyValidate).
-				Value(&fields.PrivateKey),
+				Value(&connection.SshOptions.PrivateKey),
 		).WithHideFunc(func() bool {
 			return authPassConfirm
 		}),
@@ -82,8 +83,14 @@ func Run(connection *connect.Connect) (*Fields, error) {
 
 	intPort, err := strconv.Atoi(port)
 	if err != nil {
-		return errConvertPort
+		return nil, errConvertPort
 	}
+
+	fields.Alias = connection.Alias
+	fields.Login = connection.Login
+	fields.Password = connection.Password
+	fields.Port = intPort
+	fields.PrivateKey = connection.SshOptions.PrivateKey
 
 	return fields, nil
 }

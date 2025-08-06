@@ -2,7 +2,6 @@ package command
 
 import (
 	"errors"
-	"strconv"
 	"time"
 
 	updateForm "github.com/misha-ssh/cli/internal/form/update"
@@ -41,11 +40,6 @@ var updateCmd = &cobra.Command{
 			if conn.Alias == selectedConn.Alias {
 				fields, err := updateForm.Run(&conn)
 
-				port, err := strconv.Atoi(fields.Port)
-				if err != nil {
-					return errConvertPort
-				}
-
 				updatedConnection := &connect.Connect{
 					Alias:     fields.Alias,
 					Login:     fields.Login,
@@ -54,7 +48,7 @@ var updateCmd = &cobra.Command{
 					CreatedAt: conn.CreatedAt,
 					Type:      connect.TypeSSH,
 					SshOptions: &connect.SshOptions{
-						Port:       port,
+						Port:       fields.Port,
 						PrivateKey: fields.PrivateKey,
 					},
 				}
