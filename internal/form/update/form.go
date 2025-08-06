@@ -4,6 +4,7 @@ import (
 	"errors"
 	"github.com/misha-ssh/kernel/pkg/connect"
 	"os"
+	"strconv"
 
 	"github.com/charmbracelet/huh"
 )
@@ -25,9 +26,8 @@ func Run(connection *connect.Connect) (*Fields, error) {
 		return nil, errGetHomeDir
 	}
 
-	fields := &Fields{
-		Port: DefaultPort,
-	}
+	fields := &Fields{}
+	port := DefaultPort
 
 	err = huh.NewForm(
 		huh.NewGroup(
@@ -47,7 +47,7 @@ func Run(connection *connect.Connect) (*Fields, error) {
 				Title("Port").
 				Description("Port number to connect to a remote machine").
 				Validate(portValidate).
-				Value(&fields.Port),
+				Value(&port),
 
 			huh.NewConfirm().
 				Title("Authentication").
@@ -78,6 +78,11 @@ func Run(connection *connect.Connect) (*Fields, error) {
 	).WithShowHelp(true).Run()
 	if err != nil {
 		return nil, errCreateConnection
+	}
+
+	intPort, err := strconv.Atoi(port)
+	if err != nil {
+		return errConvertPort
 	}
 
 	return fields, nil

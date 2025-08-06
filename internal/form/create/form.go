@@ -3,6 +3,7 @@ package create
 import (
 	"errors"
 	"os"
+	"strconv"
 
 	"github.com/charmbracelet/huh"
 )
@@ -14,6 +15,7 @@ const (
 var (
 	errGetHomeDir       = errors.New(`cannot get home directory`)
 	errCreateConnection = errors.New(`cannot create connection`)
+	errConvertPort      = errors.New(`cannot convert port`)
 )
 
 func Run() (*Fields, error) {
@@ -24,9 +26,8 @@ func Run() (*Fields, error) {
 		return nil, errGetHomeDir
 	}
 
-	fields := &Fields{
-		Port: DefaultPort,
-	}
+	fields := &Fields{}
+	port := DefaultPort
 
 	err = huh.NewForm(
 		huh.NewGroup(
@@ -46,7 +47,7 @@ func Run() (*Fields, error) {
 				Title("Port").
 				Description("Port number to connect to a remote machine").
 				Validate(portValidate).
-				Value(&fields.Port),
+				Value(&port),
 
 			huh.NewConfirm().
 				Title("Authentication").
@@ -78,6 +79,13 @@ func Run() (*Fields, error) {
 	if err != nil {
 		return nil, errCreateConnection
 	}
+
+	intPort, err := strconv.Atoi(port)
+	if err != nil {
+		return nil, errConvertPort
+	}
+
+	fields.Port = intPort
 
 	return fields, nil
 }
