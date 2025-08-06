@@ -33,8 +33,6 @@ var createCmd = &cobra.Command{
 			return errRunTextInput
 		}
 
-		currentTime := time.Now()
-
 		port, err := strconv.Atoi(fields.Port)
 		if err != nil {
 			return errConvertPort
@@ -44,8 +42,8 @@ var createCmd = &cobra.Command{
 			Alias:     fields.Alias,
 			Login:     fields.Login,
 			Password:  fields.Password,
-			CreatedAt: currentTime.Format("2006.01.02 15:04:05"),
-			UpdatedAt: currentTime.Format("2006.01.02 15:04:05"),
+			CreatedAt: time.Now().Format("2006.01.02 15:04:05"),
+			UpdatedAt: time.Now().Format("2006.01.02 15:04:05"),
 			Type:      connect.TypeSSH,
 			SshOptions: &connect.SshOptions{
 				Port:       port,
@@ -58,7 +56,7 @@ var createCmd = &cobra.Command{
 			return err
 		}
 
-		output.Success(successCreateConnection)
+		output.Success(successCreateConnection + " - " + connection.Alias)
 
 		return nil
 	},
