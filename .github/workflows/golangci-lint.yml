@@ -1,15 +1,8 @@
 name: golangci-lint
-on:
-  push:
-    branches:
-      - main
-      - master
-  pull_request:
+on: [ push ]
 
 permissions:
   contents: read
-  # Optional: allow read access to pull request. Use with `only-new-issues` option.
-  # pull-requests: read
 
 jobs:
   golangci:
@@ -21,6 +14,6 @@ jobs:
         with:
           go-version: stable
       - name: golangci-lint
-        uses: golangci/golangci-lint-action@v6
+        uses: golangci/golangci-lint-action@v8
         with:
-          version: v1.60
+          version: v2.1
