@@ -1,6 +1,7 @@
 package create
 
 import (
+	"errors"
 	"os"
 
 	"github.com/charmbracelet/huh"
@@ -10,12 +11,17 @@ const (
 	DefaultPort = "22"
 )
 
+var (
+	errGetHomeDir       = errors.New(`cannot get home directory`)
+	errCreateConnection = errors.New(`cannot create connection`)
+)
+
 func Run() (*Fields, error) {
 	var authPassConfirm bool
 
 	homedir, err := os.UserHomeDir()
 	if err != nil {
-		return nil, err
+		return nil, errGetHomeDir
 	}
 
 	fields := &Fields{
@@ -69,6 +75,9 @@ func Run() (*Fields, error) {
 			return authPassConfirm
 		}),
 	).WithShowHelp(true).Run()
+	if err != nil {
+		return nil, errCreateConnection
+	}
 
 	return fields, nil
 }
