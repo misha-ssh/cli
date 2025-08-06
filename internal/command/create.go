@@ -2,18 +2,22 @@ package command
 
 import (
 	"errors"
+
 	"strconv"
 	"time"
 
 	createForm "github.com/misha-ssh/cli/internal/form/create"
 
 	"github.com/misha-ssh/cli/configs/envconst"
+	"github.com/misha-ssh/cli/internal/output"
 	"github.com/misha-ssh/kernel/pkg/connect"
 	"github.com/misha-ssh/kernel/pkg/kernel"
 	"github.com/spf13/cobra"
 )
 
 var (
+	successCreateConnection = "success create connection"
+
 	errRunTextInput = errors.New("error run text input")
 	errConvertPort  = errors.New("error convert port")
 )
@@ -53,6 +57,8 @@ var createCmd = &cobra.Command{
 		if err != nil {
 			return err
 		}
+
+		output.Success(successCreateConnection)
 
 		return nil
 	},
