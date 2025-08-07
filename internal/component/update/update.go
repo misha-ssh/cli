@@ -9,10 +9,6 @@ import (
 	"github.com/charmbracelet/huh"
 )
 
-const (
-	DefaultPort = "22"
-)
-
 var (
 	errGetHomeDir       = errors.New(`cannot get home directory`)
 	errCreateConnection = errors.New(`cannot create connection`)
@@ -21,6 +17,12 @@ var (
 
 func Run(connection *connect.Connect) (*Fields, error) {
 	var authPassConfirm bool
+
+	if len(connection.Password) > 0 {
+		authPassConfirm = true
+	} else if len(connection.SshOptions.PrivateKey) > 0 {
+		authPassConfirm = false
+	}
 
 	homedir, err := os.UserHomeDir()
 	if err != nil {
