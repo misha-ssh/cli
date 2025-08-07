@@ -4,7 +4,7 @@ import (
 	"errors"
 	"time"
 
-	createForm "github.com/misha-ssh/cli/internal/form/create"
+	createForm "github.com/misha-ssh/cli/internal/component/create"
 
 	"github.com/misha-ssh/cli/configs/envconst"
 	"github.com/misha-ssh/cli/internal/output"

@@ -4,10 +4,10 @@ import (
 	"errors"
 	"time"
 
-	updateForm "github.com/misha-ssh/cli/internal/form/update"
+	updateForm "github.com/misha-ssh/cli/internal/component/update"
 
 	"github.com/misha-ssh/cli/configs/envconst"
-	"github.com/misha-ssh/cli/internal/form/list"
+	"github.com/misha-ssh/cli/internal/component/list"
 	"github.com/misha-ssh/cli/internal/output"
 	"github.com/misha-ssh/kernel/pkg/connect"
 	"github.com/misha-ssh/kernel/pkg/kernel"
