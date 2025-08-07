@@ -18,9 +18,11 @@ var (
 func Run(connection *connect.Connect) (*Fields, error) {
 	var authPassConfirm bool
 
-	if len(connection.Password) > 0 {
+	updatedConn := *connection
+
+	if len(updatedConn.Password) > 0 {
 		authPassConfirm = true
-	} else if len(connection.SshOptions.PrivateKey) > 0 {
+	} else if len(updatedConn.SshOptions.PrivateKey) > 0 {
 		authPassConfirm = false
 	}
 
@@ -30,21 +32,27 @@ func Run(connection *connect.Connect) (*Fields, error) {
 	}
 
 	fields := &Fields{}
-	port := strconv.Itoa(connection.SshOptions.Port)
+	port := strconv.Itoa(updatedConn.SshOptions.Port)
 
 	err = huh.NewForm(
 		huh.NewGroup(
 			huh.NewInput().
 				Title("Alias").
-				Description("Unique connection name").
-				Validate(aliasValidate).
-				Value(&connection.Alias),
+				Description("Unique updatedConn name").
+				Validate(func(newAlias string) error {
+					if connection.Alias != newAlias {
+						return aliasValidate(newAlias)
+					}
+
+					return nil
+				}).
+				Value(&updatedConn.Alias),
 
 			huh.NewInput().
 				Title("Login").
 				Description("Username of the remote machine").
 				Validate(huh.ValidateNotEmpty()).
-				Value(&connection.Login),
+				Value(&updatedConn.Login),
 
 			huh.NewInput().
 				Title("Port").
@@ -64,7 +72,7 @@ func Run(connection *connect.Connect) (*Fields, error) {
 				Title("Password").
 				EchoMode(huh.EchoModePassword).
 				Description("Password to connect to a remote machine").
-				Value(&connection.Password),
+				Value(&updatedConn.Password),
 		).WithHideFunc(func() bool {
 			return !authPassConfirm
 		}),
@@ -74,7 +82,7 @@ func Run(connection *connect.Connect) (*Fields, error) {
 				Description("select file with private key").
 				CurrentDirectory(homedir).
 				Validate(privateKeyValidate).
-				Value(&connection.SshOptions.PrivateKey),
+				Value(&updatedConn.SshOptions.PrivateKey),
 		).WithHideFunc(func() bool {
 			return authPassConfirm
 		}),
@@ -88,11 +96,19 @@ func Run(connection *connect.Connect) (*Fields, error) {
 		return nil, errConvertPort
 	}
 
-	fields.Alias = connection.Alias
-	fields.Login = connection.Login
-	fields.Password = connection.Password
+	fields.Alias = updatedConn.Alias
+	fields.Login = updatedConn.Login
 	fields.Port = intPort
-	fields.PrivateKey = connection.SshOptions.PrivateKey
+	fields.Password = updatedConn.Password
+	fields.PrivateKey = updatedConn.SshOptions.PrivateKey
+
+	if len(connection.Password) > 0 && !authPassConfirm {
+		fields.Password = ""
+	}
+
+	if len(updatedConn.SshOptions.PrivateKey) > 0 && authPassConfirm {
+		fields.PrivateKey = ""
+	}
 
 	return fields, nil
 }
