@@ -18,6 +18,7 @@ var (
 	successUpdateConnection = "success update connection"
 
 	errNotFoundConnection = errors.New("not found connections")
+	errUpdateForm         = errors.New("failed to update connections")
 )
 
 // updateCmd Command for update create
@@ -39,6 +40,9 @@ var updateCmd = &cobra.Command{
 		for _, conn := range connections.Connects {
 			if conn.Alias == selectedConn.Alias {
 				fields, err := updateForm.Run(&conn)
+				if err != nil {
+					return errUpdateForm
+				}
 
 				updatedConnection := &connect.Connect{
 					Alias:     fields.Alias,
