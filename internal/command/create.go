@@ -2,14 +2,12 @@ package command
 
 import (
 	"errors"
-
-	"strconv"
 	"time"
 
-	createForm "github.com/misha-ssh/cli/internal/form/create"
+	createForm "github.com/misha-ssh/cli/internal/component/create"
 
 	"github.com/misha-ssh/cli/configs/envconst"
-	"github.com/misha-ssh/cli/internal/output"
+	"github.com/misha-ssh/cli/internal/component/output"
 	"github.com/misha-ssh/kernel/pkg/connect"
 	"github.com/misha-ssh/kernel/pkg/kernel"
 	"github.com/spf13/cobra"
@@ -19,7 +17,6 @@ var (
 	successCreateConnection = "success create connection"
 
 	errRunTextInput = errors.New("error run text input")
-	errConvertPort  = errors.New("error convert port")
 )
 
 // createCmd Command for create create
@@ -33,22 +30,15 @@ var createCmd = &cobra.Command{
 			return errRunTextInput
 		}
 
-		currentTime := time.Now()
-
-		port, err := strconv.Atoi(fields.Port)
-		if err != nil {
-			return errConvertPort
-		}
-
 		connection := &connect.Connect{
 			Alias:     fields.Alias,
 			Login:     fields.Login,
 			Password:  fields.Password,
-			CreatedAt: currentTime.Format("2006.01.02 15:04:05"),
-			UpdatedAt: currentTime.Format("2006.01.02 15:04:05"),
+			CreatedAt: time.Now().Format("2006.01.02 15:04:05"),
+			UpdatedAt: time.Now().Format("2006.01.02 15:04:05"),
 			Type:      connect.TypeSSH,
 			SshOptions: &connect.SshOptions{
-				Port:       port,
+				Port:       fields.Port,
 				PrivateKey: fields.PrivateKey,
 			},
 		}
@@ -58,7 +48,7 @@ var createCmd = &cobra.Command{
 			return err
 		}
 
-		output.Success(successCreateConnection)
+		output.Success(successCreateConnection + " - " + connection.Alias)
 
 		return nil
 	},
