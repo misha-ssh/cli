@@ -58,7 +58,7 @@ var updateCmd = &cobra.Command{
 					return err
 				}
 
-				output.Success(successUpdateConnection + " - " + selectedConn.Alias)
+				output.Success(successUpdateConnection + " - " + fields.Alias)
 
 				return nil
 			}
