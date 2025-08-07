@@ -7,7 +7,7 @@ import (
 	createForm "github.com/misha-ssh/cli/internal/component/create"
 
 	"github.com/misha-ssh/cli/configs/envconst"
-	"github.com/misha-ssh/cli/internal/output"
+	"github.com/misha-ssh/cli/internal/component/output"
 	"github.com/misha-ssh/kernel/pkg/connect"
 	"github.com/misha-ssh/kernel/pkg/kernel"
 	"github.com/spf13/cobra"
