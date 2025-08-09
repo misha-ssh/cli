@@ -23,7 +23,6 @@ func Run() {
 	app.AddCommand(connectCmd)
 	app.AddCommand(createCmd)
 	app.AddCommand(deleteCmd)
-	app.AddCommand(listCmd)
 	app.AddCommand(updateCmd)
 
 	if err := fang.Execute(context.Background(), app); err != nil {
