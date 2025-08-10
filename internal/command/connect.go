@@ -1,10 +1,9 @@
 package command
 
 import (
+	"github.com/misha-ssh/cli/configs/envconst"
 	"github.com/misha-ssh/cli/internal/component/list"
 	"github.com/misha-ssh/kernel/pkg/kernel"
-
-	"github.com/misha-ssh/cli/configs/envconst"
 	"github.com/spf13/cobra"
 )
 
@@ -24,17 +23,11 @@ var connectCmd = &cobra.Command{
 			return err
 		}
 
-		for _, conn := range connections.Connects {
-			if conn.Alias == selectedConn.Alias {
-				err = kernel.Connect(&conn)
-				if err != nil {
-					return err
-				}
-
-				return nil
-			}
+		err = kernel.Connect(selectedConn)
+		if err != nil {
+			return err
 		}
 
-		return errDeleteNotFoundConnection
+		return nil
 	},
 }

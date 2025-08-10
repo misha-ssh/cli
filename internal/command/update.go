@@ -34,40 +34,34 @@ var updateCmd = &cobra.Command{
 
 		selectedConn, err := list.Run(connections)
 		if err != nil {
+			return errNotFoundConnection
+		}
+
+		fields, err := updateForm.Run(selectedConn)
+		if err != nil {
+			return errUpdateForm
+		}
+
+		updatedConnection := &connect.Connect{
+			Alias:     fields.Alias,
+			Login:     fields.Login,
+			Password:  fields.Password,
+			UpdatedAt: time.Now().Format("2006.01.02 15:04:05"),
+			CreatedAt: selectedConn.CreatedAt,
+			Type:      connect.TypeSSH,
+			SshOptions: &connect.SshOptions{
+				Port:       fields.Port,
+				PrivateKey: fields.PrivateKey,
+			},
+		}
+
+		err = kernel.Update(updatedConnection, selectedConn.Alias)
+		if err != nil {
 			return err
 		}
 
-		for _, conn := range connections.Connects {
-			if conn.Alias == selectedConn.Alias {
-				fields, err := updateForm.Run(&conn)
-				if err != nil {
-					return errUpdateForm
-				}
+		output.Success(successUpdateConnection + " - " + fields.Alias)
 
-				updatedConnection := &connect.Connect{
-					Alias:     fields.Alias,
-					Login:     fields.Login,
-					Password:  fields.Password,
-					UpdatedAt: time.Now().Format("2006.01.02 15:04:05"),
-					CreatedAt: conn.CreatedAt,
-					Type:      connect.TypeSSH,
-					SshOptions: &connect.SshOptions{
-						Port:       fields.Port,
-						PrivateKey: fields.PrivateKey,
-					},
-				}
-
-				err = kernel.Update(updatedConnection, selectedConn.Alias)
-				if err != nil {
-					return err
-				}
-
-				output.Success(successUpdateConnection + " - " + fields.Alias)
-
-				return nil
-			}
-		}
-
-		return errNotFoundConnection
+		return nil
 	},
 }
