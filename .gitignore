@@ -30,5 +30,4 @@ go.work.sum
 
 cmd/misha/misha
 
-completions/
-manpages
+manpages/

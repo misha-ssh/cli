@@ -8,7 +8,6 @@ project_name: misha
 before:
   hooks:
     - go mod tidy
-    - ./scripts/completions.sh
     - ./scripts/manpages.sh
 
 builds:
@@ -40,11 +39,6 @@ archives:
           group: root
           mtime: "{{ .CommitDate }}"
       - src: LICENSE.md
-        info:
-          owner: root
-          group: root
-          mtime: "{{ .CommitDate }}"
-      - src: completions/*
         info:
           owner: root
           group: root
@@ -81,10 +75,6 @@ homebrew_casks:
     license: "MIT"
     manpages:
       - "manpages/misha.1.gz"
-    completions:
-      bash: "completions/misha.bash"
-      zsh: "completions/misha.zsh"
-      fish: "completions/misha.fish"
     hooks:
       post:
         install: |
