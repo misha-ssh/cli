@@ -41,7 +41,7 @@ release:
 homebrew_casks:
   - repository:
       owner: misha-ssh
-      name: homebrew-misha
+      name: homebrew-tap
       token: "{{ .Env.GITHUB_TOKEN }}"
     name: misha
     commit_author:
