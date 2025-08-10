@@ -38,7 +38,7 @@ release:
   prerelease: auto
   name_template: "Misha ssh {{.Version}}"
 
-homebrew_casks:
+brews:
   -
     name: misha
     commit_author:
