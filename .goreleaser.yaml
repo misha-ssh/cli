@@ -50,6 +50,8 @@ homebrew_casks:
     commit_msg_template: "Brew update for {{ .ProjectName }} version {{ .Tag }}"
     description: "misha - ssh connection manager"
     license: "MIT"
+    manpages:
+      - "manpages/misha.1.gz"
     completions:
       bash: "completions/misha.bash"
       zsh: "completions/misha.zsh"
