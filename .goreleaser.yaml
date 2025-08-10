@@ -46,6 +46,7 @@ homebrew_casks:
     name: misha
     commit_author:
       name: deniskorbakov
+      email: korbakovd009@gmail.com
     commit_msg_template: "Brew update for {{ .ProjectName }} version {{ .Tag }}"
     description: "misha - ssh connection manager"
     license: "MIT"
