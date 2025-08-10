@@ -4,6 +4,8 @@ before:
   hooks:
     - go mod tidy
     - go generate ./...
+    - ./scripts/completions.sh
+    - ./scripts/manpages.sh
 
 builds:
   - env:
@@ -16,15 +18,38 @@ builds:
     main: ./cmd/misha
 
 archives:
-  - formats: tar.gz
-    # this name template makes the OS and Arch compatible with the results of `uname`.
-    name_template: >-
-      {{ .ProjectName }}_
+  - name_template: >-
+      {{- .ProjectName }}_
       {{- title .Os }}_
       {{- if eq .Arch "amd64" }}x86_64
       {{- else if eq .Arch "386" }}i386
       {{- else }}{{ .Arch }}{{ end }}
-      {{- if .Arm }}v{{ .Arm }}{{ end }}
+      {{- if .Arm }}v{{ .Arm }}{{ end -}}
+    builds_info:
+      group: root
+      owner: root
+      mtime: "{{ .CommitDate }}"
+    files:
+      - src: README.md
+        info:
+          owner: root
+          group: root
+          mtime: "{{ .CommitDate }}"
+      - src: LICENSE.md
+        info:
+          owner: root
+          group: root
+          mtime: "{{ .CommitDate }}"
+      - src: completions/*
+        info:
+          owner: root
+          group: root
+          mtime: "{{ .CommitDate }}"
+      - src: manpages/*
+        info:
+          owner: root
+          group: root
+          mtime: "{{ .CommitDate }}"
 
 changelog:
   sort: asc
