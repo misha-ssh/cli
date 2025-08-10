@@ -48,10 +48,6 @@ homebrew_casks:
     directory: Formula
     description: "misha - ssh connection manager"
     license: "MIT"
-    install: |
-      bin.install "misha"
-    test: |
-      system "#{bin}/misha --version"
     # Repository to push the generated files to.
     repository:
       owner: misha-ssh
