@@ -10,32 +10,36 @@ var (
 	errNotFoundConnections = errors.New("not found connections")
 )
 
-func Run(connections *connect.Connections) (*Fields, error) {
+func Run(connections *connect.Connections) (*connect.Connect, error) {
 	var aliases []string
-	var fields Fields
+	var selectedAlias string
 
 	if len(connections.Connects) == 0 {
 		return nil, errNotFoundConnections
 	}
 
+	aliasToConn := make(map[string]*connect.Connect)
+
 	for _, conn := range connections.Connects {
 		aliases = append(aliases, conn.Alias)
+		aliasToConn[conn.Alias] = &conn
 	}
-
-	options := huh.NewOptions(aliases...)
 
 	err := huh.NewForm(
 		huh.NewGroup(
 			huh.NewSelect[string]().
 				Title("Select Connection").
-				Description("test description").
-				Options(options...).
-				Value(&fields.Alias),
+				Options(huh.NewOptions(aliases...)...).
+				Value(&selectedAlias),
 		)).WithShowHelp(true).Run()
-
 	if err != nil {
 		return nil, err
 	}
 
-	return &fields, nil
+	selectedConn, exists := aliasToConn[selectedAlias]
+	if !exists {
+		return nil, errNotFoundConnections
+	}
+
+	return selectedConn, nil
 }
