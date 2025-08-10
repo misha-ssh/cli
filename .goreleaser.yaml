@@ -38,7 +38,7 @@ release:
   prerelease: auto
   name_template: "Misha ssh {{.Version}}"
 
-brews:
+homebrew_casks:
   -
     name: misha
     commit_author:
@@ -54,7 +54,7 @@ brews:
       system "#{bin}/misha --version"
     # Repository to push the generated files to.
     repository:
-      owner: deniskorbakov
+      owner: misha-ssh
       name: homebrew-misha
       branch: main
       token: "{{ .Env.GITHUB_TOKEN }}"
