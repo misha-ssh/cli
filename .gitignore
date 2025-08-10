@@ -29,3 +29,6 @@ go.work.sum
 .vscode/
 
 cmd/misha/misha
+
+completions/
+manpages

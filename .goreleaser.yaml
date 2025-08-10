@@ -1,9 +1,13 @@
 version: 2
+
+env:
+  - GO111MODULE=on
+
 project_name: misha
+
 before:
   hooks:
     - go mod tidy
-    - go generate ./...
     - ./scripts/completions.sh
     - ./scripts/manpages.sh
 
