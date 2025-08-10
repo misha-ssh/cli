@@ -2,11 +2,11 @@ package update
 
 import (
 	"errors"
-	"github.com/misha-ssh/kernel/pkg/connect"
 	"os"
 	"strconv"
 
 	"github.com/charmbracelet/huh"
+	"github.com/misha-ssh/kernel/pkg/connect"
 )
 
 var (

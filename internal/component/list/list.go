@@ -2,6 +2,7 @@ package list
 
 import (
 	"errors"
+
 	"github.com/charmbracelet/huh"
 	"github.com/misha-ssh/kernel/pkg/connect"
 )
