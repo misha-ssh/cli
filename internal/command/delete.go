@@ -2,6 +2,7 @@ package command
 
 import (
 	"errors"
+
 	"github.com/misha-ssh/cli/configs/envconst"
 	"github.com/misha-ssh/cli/internal/component/list"
 	"github.com/misha-ssh/cli/internal/component/output"
@@ -28,22 +29,16 @@ var deleteCmd = &cobra.Command{
 
 		selectedConn, err := list.Run(connections)
 		if err != nil {
+			return errDeleteNotFoundConnection
+		}
+
+		err = kernel.Delete(selectedConn)
+		if err != nil {
 			return err
 		}
 
-		for _, conn := range connections.Connects {
-			if conn.Alias == selectedConn.Alias {
-				err = kernel.Delete(&conn)
-				if err != nil {
-					return err
-				}
+		output.Success(successDeleteConnection + " - " + selectedConn.Alias)
 
-				output.Success(successDeleteConnection + " - " + selectedConn.Alias)
-
-				return nil
-			}
-		}
-
-		return errDeleteNotFoundConnection
+		return nil
 	},
 }
