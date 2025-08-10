@@ -6,26 +6,31 @@ import (
 
 	"github.com/charmbracelet/fang"
 	"github.com/misha-ssh/cli/configs/envconst"
+	"github.com/misha-ssh/cli/internal/version"
 	"github.com/spf13/cobra"
 )
 
 // Run Start app with cobra cmd
 func Run() {
-	app := &cobra.Command{
+	cmd := &cobra.Command{
 		Use:     envconst.UseRootCmd,
 		Long:    envconst.LongRootCmd,
 		Example: envconst.ExampleRootCmd,
 	}
 
 	// Disable default options cmd
-	app.Root().CompletionOptions.DisableDefaultCmd = true
+	cmd.Root().CompletionOptions.DisableDefaultCmd = true
 
-	app.AddCommand(connectCmd)
-	app.AddCommand(createCmd)
-	app.AddCommand(deleteCmd)
-	app.AddCommand(updateCmd)
+	cmd.AddCommand(connectCmd)
+	cmd.AddCommand(createCmd)
+	cmd.AddCommand(deleteCmd)
+	cmd.AddCommand(updateCmd)
 
-	if err := fang.Execute(context.Background(), app); err != nil {
+	if err := fang.Execute(
+		context.Background(),
+		cmd,
+		fang.WithVersion(version.Get()),
+	); err != nil {
 		os.Exit(1)
 	}
 }
