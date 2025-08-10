@@ -38,7 +38,7 @@ archives:
           owner: root
           group: root
           mtime: "{{ .CommitDate }}"
-      - src: LICENSE.md
+      - src: LICENSE
         info:
           owner: root
           group: root
