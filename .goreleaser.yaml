@@ -39,18 +39,13 @@ release:
   name_template: "Misha ssh {{.Version}}"
 
 homebrew_casks:
-  -
+  - repository:
+      owner: misha-ssh
+      name: homebrew-misha
+      token: "{{ .Env.GITHUB_TOKEN }}"
     name: misha
     commit_author:
       name: deniskorbakov
-      email: korbakovd009@gmail.com
-    commit_msg_template: "Brew formula update for {{ .ProjectName }} version {{ .Tag }}"
-    directory: Formula
+    commit_msg_template: "Brew update for {{ .ProjectName }} version {{ .Tag }}"
     description: "misha - ssh connection manager"
     license: "MIT"
-    # Repository to push the generated files to.
-    repository:
-      owner: misha-ssh
-      name: homebrew-misha
-      branch: main
-      token: "{{ .Env.GITHUB_TOKEN }}"
