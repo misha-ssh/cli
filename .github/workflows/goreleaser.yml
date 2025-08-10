@@ -29,7 +29,7 @@ jobs:
         with:
           distribution: goreleaser
           # GoReleaser version
-          version: "latest"
+          version: "~> v2"
           # Arguments to pass to GoReleaser
           args: release --clean
           workdir: .
