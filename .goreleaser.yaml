@@ -36,7 +36,7 @@ changelog:
 release:
   draft: true
   prerelease: auto
-  name_template: "Misha ssh {{.Version}}"
+  name_template: "Misha {{.Version}}"
 
 homebrew_casks:
   - repository:
