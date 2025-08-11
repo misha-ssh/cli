@@ -81,3 +81,32 @@ homebrew_casks:
           if system_command("/usr/bin/xattr", args: ["-h"]).exit_status == 0
             system_command "/usr/bin/xattr", args: ["-dr", "com.apple.quarantine", "#{staged_path}/misha"]
           end
+
+nfpms:
+  - package_name: misha
+    file_name_template: "{{ .ConventionalFileName }}"
+    id: packages
+    homepage: https://misha-ssh.github.io/docs
+    description: |-
+      Misha - ssh connection manager
+    maintainer: Denis Korbakov <korbakovd009@gmail.com>
+    license: MIT
+    vendor: MishaSSH
+    bindir: /usr/bin
+    section: utils
+    mtime: "{{ .CommitDate }}"
+    formats:
+      - apk
+      - deb
+      - rpm
+      - archlinux
+    dependencies:
+      - git
+    overrides:
+      deb:
+        suggests:
+          - ssh
+    deb:
+      lintian_overrides:
+        - statically-linked-binary
+        - changelog-file-missing-in-native-package
