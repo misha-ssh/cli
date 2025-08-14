@@ -11,6 +11,7 @@ var (
 	errNotFoundConnections = errors.New("not found connections")
 )
 
+// Run Get selected connection from list
 func Run(connections *connect.Connections) (*connect.Connect, error) {
 	var aliases []string
 	var selectedAlias string
