@@ -15,6 +15,7 @@ var (
 	errConvertPort      = errors.New(`cannot convert port`)
 )
 
+// Run get form for update connect.Connect
 func Run(connection *connect.Connect) (*Fields, error) {
 	var authPassConfirm bool
 

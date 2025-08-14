@@ -10,6 +10,7 @@ var (
 	emptyVersion = ""
 )
 
+// Get return version from debug main version
 func Get() string {
 	if info, ok := debug.ReadBuildInfo(); ok {
 		version := info.Main.Version

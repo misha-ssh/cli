@@ -27,6 +27,7 @@ var (
 	errPreloadedConnections error
 )
 
+// init Loads existing SSH connections at startup
 func init() {
 	connections, err := kernel.List()
 	if err != nil {
@@ -36,6 +37,7 @@ func init() {
 	preloadedConnections = connections
 }
 
+// aliasValidate validate on exists alias
 func aliasValidate(alias string) error {
 	if strings.TrimSpace(alias) == "" || alias == "" {
 		return errAliasIsNotEmpty
@@ -54,6 +56,7 @@ func aliasValidate(alias string) error {
 	return nil
 }
 
+// portValidate validate on correctly port
 func portValidate(s string) error {
 	port, err := strconv.Atoi(s)
 	if err != nil {
@@ -67,6 +70,7 @@ func portValidate(s string) error {
 	return nil
 }
 
+// privateKeyValidate validate on exists file
 func privateKeyValidate(filename string) error {
 	if strings.TrimSpace(filename) == "" || filename == "" {
 		return nil

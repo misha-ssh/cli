@@ -18,6 +18,7 @@ var (
 	errConvertPort      = errors.New(`cannot convert port`)
 )
 
+// Run Main function that runs an interactive form to collect SSH connection details
 func Run() (*Fields, error) {
 	var authPassConfirm bool
 
