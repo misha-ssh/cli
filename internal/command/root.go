@@ -21,10 +21,12 @@ func Run() {
 	// Disable default options cmd
 	cmd.Root().CompletionOptions.DisableDefaultCmd = true
 
-	cmd.AddCommand(connectCmd)
-	cmd.AddCommand(createCmd)
-	cmd.AddCommand(deleteCmd)
-	cmd.AddCommand(updateCmd)
+	cmd.AddCommand(
+		connectCmd,
+		createCmd,
+		deleteCmd,
+		updateCmd,
+	)
 
 	if err := fang.Execute(
 		context.Background(),
