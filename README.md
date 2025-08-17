@@ -14,10 +14,6 @@ Made using data from packages:
 * [fang](http://github.com/charmbracelet/fang)
 * [huh](https://github.com/charmbracelet/huh)
 
-## ✨ Documentation
-
-You can read the documentation by clicking on the [link](https://misha-ssh.github.io/docs)
-
 ## ✨ Install
 
 Install using homebrew:
