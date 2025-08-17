@@ -3,11 +3,8 @@
 ![Go Report Card](https://goreportcard.com/badge/github.com/misha-ssh/cli)
 ![Release](https://img.shields.io/github/release/misha-ssh/cli?status.svg)
 ![Action Lint](https://github.com/misha-ssh/cli/actions/workflows/lint.yml/badge.svg)
-![Action Tests](https://github.com/misha-ssh/cli/actions/workflows/build.yml/badge.svg)
-![Action Coverage](https://github.com/misha-ssh/cli/actions/workflows/release.yml/badge.svg)
-![GitHub](https://img.shields.io/github/license/misha-ssh/cli)
+![Action Build](https://github.com/misha-ssh/cli/actions/workflows/build.yml/badge.svg)
 ![GitHub Repo stars](https://img.shields.io/github/stars/misha-ssh/cli)
-![GitHub issues](https://img.shields.io/github/issues/misha-ssh/cli)
 
 Misha - SSH client made on go
 
