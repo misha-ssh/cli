@@ -54,7 +54,7 @@ The command to update the connection
 
 The command to delete the connection
 
-[![asciicast](https://asciinema.org/a/734051.svg)](https://asciinema.org/a/734051?t=0:05)
+[![asciicast](https://asciinema.org/a/734051.svg)](https://asciinema.org/a/734051)
 
 ### 🤖 Run ssh server
 
