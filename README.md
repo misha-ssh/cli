@@ -1,14 +1,13 @@
 # Misha - cli ssh client
 
-![Go Report Card](https://goreportcard.com/badge/github.com/misha-ssh/kernel)
-![Release](https://img.shields.io/github/release/misha-ssh/kernel?status.svg)
-![Action Lint](https://github.com/misha-ssh/kernel/actions/workflows/lint.yml/badge.svg)
-![Action Tests](https://github.com/misha-ssh/kernel/actions/workflows/tests.yml/badge.svg)
-![Action Coverage](https://github.com/misha-ssh/kernel/actions/workflows/coverage.yml/badge.svg)
-![GitHub top language](https://img.shields.io/github/languages/top/ssh-connection-manager/ssh-)
-![GitHub](https://img.shields.io/github/license/ssh-connection-manager/ssh-)
-![GitHub Repo stars](https://img.shields.io/github/stars/ssh-connection-manager/ssh-)
-![GitHub issues](https://img.shields.io/github/issues/ssh-connection-manager/ssh-)
+![Go Report Card](https://goreportcard.com/badge/github.com/misha-ssh/cli)
+![Release](https://img.shields.io/github/release/misha-ssh/cli?status.svg)
+![Action Lint](https://github.com/misha-ssh/cli/actions/workflows/lint.yml/badge.svg)
+![Action Tests](https://github.com/misha-ssh/cli/actions/workflows/build.yml/badge.svg)
+![Action Coverage](https://github.com/misha-ssh/cli/actions/workflows/release.yml/badge.svg)
+![GitHub](https://img.shields.io/github/license/misha-ssh/cli)
+![GitHub Repo stars](https://img.shields.io/github/stars/misha-ssh/cli)
+![GitHub issues](https://img.shields.io/github/issues/misha-ssh/cli)
 
 Misha - SSH client made on go
 
