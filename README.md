@@ -10,68 +10,125 @@
 ![GitHub Repo stars](https://img.shields.io/github/stars/ssh-connection-manager/ssh-)
 ![GitHub issues](https://img.shields.io/github/issues/ssh-connection-manager/ssh-)
 
-This package acts as the core for an ssh client written in go
+Misha - SSH client made on go
 
 Made using data from packages:
 
-* [crypto](https://pkg.go.dev/golang.org/x/crypto)
-* [go-keyring](http://github.com/zalando/go-keyring)
-* [term](https://pkg.go.dev/golang.org/x/term)
+* [cobra](https://github.com/spf13/cobra)
+* [fang](http://github.com/charmbracelet/fang)
+* [huh](https://github.com/charmbracelet/huh)
 
 ## ✨ Documentation
 
-install this package in your repository
-
-```bash
-go get github.com/misha-ssh/kernel
-```
+You can read the documentation by clicking on the [link](https://misha-ssh.github.io/docs)
 
 ## ✨ Install
 
-install this package in your repository
+Install using homebrew:
 
 ```bash
-go get github.com/misha-ssh/kernel
+# macOS or Linux
+brew install --cask misha
 ```
+You can also install the package from the release via the [link](https://github.com/misha-ssh/cli/releases)
 
 ## 📖 Examples & Usage
 
-You will be provided with a list of commands that you can use in your projects
-
-The code with the commands will be on the way - [link](./examples/command)
+The list of commands that you can use in this SSH client
 
 ### 🔌 Connect
 
 The command to connect to the remote server
 
+[![asciicast](https://asciinema.org/a/734047.svg)](https://asciinema.org/a/734047)
+
 ### ✍️ Create
 
 The command to create a connection
 
-this command saves the connection to a file and goes through the dependency initialization cycle
+[![asciicast](https://asciinema.org/a/734049.svg)](https://asciinema.org/a/734049)
 
 ### 🪄 Update
 
 The command to update the connection
 
-This command also updates the connection data if you need to resave the private key
-
+[![asciicast](https://asciinema.org/a/734050.svg)](https://asciinema.org/a/734050)
 
 ### 🆑 Delete
 
 The command to delete the connection
 
-This command removes the connection from the file and also deletes the private key if it has been saved
+[![asciicast](https://asciinema.org/a/734051.svg)](https://asciinema.org/a/734051?t=0:05)
 
-### 📝 List
+### 🤖 Run ssh server
 
-The command to get a list of connections
+for local testing, you can raise your ssh servers - there are three types of them.
 
-This command will list the connections from the previously created connections
+1) password connection
+
+to run, write the command:
+
+```bash
+make up-ssh
+```
+
+to install and remove the server:
+
+```bash
+make down-ssh
+```
+
+Server accesses:
+
+* ``login`` - root
+* ``address`` - localhost
+* ``password`` - password
+* ``port`` - 22
+
+2) connect with a private key
+
+to run, write the command:
+
+```bash
+make up-ssh-key
+```
+
+to install and remove the server:
+
+```bash
+make down-ssh-key
+```
+
+Server accesses:
+
+* ``login`` - root
+* ``address`` - localhost
+* ``private key`` - ./dockerkey
+* ``port`` - 2222
+
+3) connecting via a non-standard port
+
+to run, write the command:
+
+```bash
+make up-ssh-port
+```
+
+to install and remove the server:
+
+```bash
+make down-ssh-port
+```
+
+Server accesses:
+
+* ``login`` - root
+* ``address`` - localhost
+* ``password`` - password
+* ``port`` - 2222
+
 
 ## 🧪 Testing
-
-You can run the command for testing after the step with local installation
 
 The command to launch the linter:
 
