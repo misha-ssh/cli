@@ -45,6 +45,7 @@ var updateCmd = &cobra.Command{
 		updatedConnection := &connect.Connect{
 			Alias:     fields.Alias,
 			Login:     fields.Login,
+			Address:   fields.Address,
 			Password:  fields.Password,
 			UpdatedAt: time.Now().Format("2006.01.02 15:04:05"),
 			CreatedAt: selectedConn.CreatedAt,

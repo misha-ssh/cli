@@ -45,6 +45,12 @@ func Run() (*Fields, error) {
 				Value(&fields.Login),
 
 			huh.NewInput().
+				Title("Address").
+				Description("Address of the remote machine").
+				Validate(huh.ValidateNotEmpty()).
+				Value(&fields.Address),
+
+			huh.NewInput().
 				Title("Port").
 				Description("Port number to connect to a remote machine").
 				Validate(portValidate).
@@ -72,7 +78,8 @@ func Run() (*Fields, error) {
 				Description("select file with private key").
 				CurrentDirectory(homedir).
 				Validate(privateKeyValidate).
-				Value(&fields.PrivateKey),
+				Value(&fields.PrivateKey).
+				Picking(true),
 		).WithHideFunc(func() bool {
 			return authPassConfirm
 		}),
