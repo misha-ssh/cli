@@ -56,6 +56,12 @@ func Run(connection *connect.Connect) (*Fields, error) {
 				Value(&updatedConn.Login),
 
 			huh.NewInput().
+				Title("Address").
+				Description("Address of the remote machine").
+				Validate(huh.ValidateNotEmpty()).
+				Value(&updatedConn.Address),
+
+			huh.NewInput().
 				Title("Port").
 				Description("Port number to connect to a remote machine").
 				Validate(portValidate).
@@ -99,6 +105,7 @@ func Run(connection *connect.Connect) (*Fields, error) {
 
 	fields.Alias = updatedConn.Alias
 	fields.Login = updatedConn.Login
+	fields.Address = updatedConn.Address
 	fields.Port = intPort
 	fields.Password = updatedConn.Password
 	fields.PrivateKey = updatedConn.SshOptions.PrivateKey
