@@ -78,7 +78,8 @@ func Run() (*Fields, error) {
 				Description("select file with private key").
 				CurrentDirectory(homedir).
 				Validate(privateKeyValidate).
-				Value(&fields.PrivateKey),
+				Value(&fields.PrivateKey).
+				Picking(true),
 		).WithHideFunc(func() bool {
 			return authPassConfirm
 		}),
