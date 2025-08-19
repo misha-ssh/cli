@@ -32,25 +32,25 @@ The list of commands that you can use in this SSH client
 
 The command to connect to the remote server
 
-[![asciicast](https://asciinema.org/a/734047.svg)](https://asciinema.org/a/734047)
+[![video](.assets/connect.svg)](https://asciinema.org/a/734047)
 
 ### ✍️ Create
 
 The command to create a connection
 
-[![asciicast](https://asciinema.org/a/734049.svg)](https://asciinema.org/a/734049)
+[![video](.assets/create.svg)](https://asciinema.org/a/734430)
 
 ### 🪄 Update
 
 The command to update the connection
 
-[![asciicast](https://asciinema.org/a/734050.svg)](https://asciinema.org/a/734050)
+[![video](.assets/update.svg)](https://asciinema.org/a/734431)
 
 ### 🆑 Delete
 
 The command to delete the connection
 
-[![asciicast](https://asciinema.org/a/734051.svg)](https://asciinema.org/a/734051)
+[![video](.assets/delete.svg)](https://asciinema.org/a/734051)
 
 ### 🤖 Run ssh server
 
