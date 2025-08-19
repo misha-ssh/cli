@@ -33,6 +33,7 @@ var createCmd = &cobra.Command{
 		connection := &connect.Connect{
 			Alias:     fields.Alias,
 			Login:     fields.Login,
+			Address:   fields.Address,
 			Password:  fields.Password,
 			CreatedAt: time.Now().Format("2006.01.02 15:04:05"),
 			UpdatedAt: time.Now().Format("2006.01.02 15:04:05"),

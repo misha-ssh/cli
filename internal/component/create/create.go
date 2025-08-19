@@ -45,6 +45,12 @@ func Run() (*Fields, error) {
 				Value(&fields.Login),
 
 			huh.NewInput().
+				Title("Address").
+				Description("Address of the remote machine").
+				Validate(huh.ValidateNotEmpty()).
+				Value(&fields.Address),
+
+			huh.NewInput().
 				Title("Port").
 				Description("Port number to connect to a remote machine").
 				Validate(portValidate).
