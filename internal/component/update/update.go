@@ -18,13 +18,19 @@ var (
 // Run get form for update connect.Connect
 func Run(connection *connect.Connect) (*Fields, error) {
 	var authPassConfirm bool
+	var updatedPrivateKey bool
 
 	updatedConn := *connection
 
-	if len(updatedConn.Password) > 0 {
+	hasOriginalPrivateKey := len(connection.SshOptions.PrivateKey) > 0
+	hasOriginalPassword := len(connection.Password) > 0
+
+	if hasOriginalPassword {
 		authPassConfirm = true
-	} else if len(updatedConn.SshOptions.PrivateKey) > 0 {
+	} else if hasOriginalPrivateKey {
 		authPassConfirm = false
+	} else {
+		authPassConfirm = true
 	}
 
 	homedir, err := os.UserHomeDir()
@@ -84,14 +90,33 @@ func Run(connection *connect.Connect) (*Fields, error) {
 			return !authPassConfirm
 		}),
 		huh.NewGroup(
+			huh.NewConfirm().
+				Title("Update private key?").
+				Description("Do you want to update the private key?").
+				Affirmative("Yes").
+				Negative("No").
+				Value(&updatedPrivateKey),
+		).WithHideFunc(func() bool {
+			return authPassConfirm || !hasOriginalPrivateKey
+		}),
+		huh.NewGroup(
 			huh.NewFilePicker().
 				Title("PrivateKey").
-				Description("select file with private key").
+				Description("Select file with private key").
 				CurrentDirectory(homedir).
 				Validate(privateKeyValidate).
-				Value(&updatedConn.SshOptions.PrivateKey),
+				Value(&updatedConn.SshOptions.PrivateKey).
+				Picking(true),
 		).WithHideFunc(func() bool {
-			return authPassConfirm
+			if authPassConfirm {
+				return true
+			}
+
+			if hasOriginalPrivateKey {
+				return !updatedPrivateKey
+			}
+
+			return false
 		}),
 	).WithShowHelp(true).Run()
 	if err != nil {
@@ -110,11 +135,15 @@ func Run(connection *connect.Connect) (*Fields, error) {
 	fields.Password = updatedConn.Password
 	fields.PrivateKey = updatedConn.SshOptions.PrivateKey
 
-	if len(connection.Password) > 0 && !authPassConfirm {
+	if hasOriginalPrivateKey && !updatedPrivateKey && !authPassConfirm {
+		fields.PrivateKey = connection.SshOptions.PrivateKey
+	}
+
+	if hasOriginalPassword && !authPassConfirm {
 		fields.Password = ""
 	}
 
-	if len(updatedConn.SshOptions.PrivateKey) > 0 && authPassConfirm {
+	if hasOriginalPrivateKey && authPassConfirm {
 		fields.PrivateKey = ""
 	}
 
