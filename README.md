@@ -1,6 +1,6 @@
-<center>
-<img alt="mascot" src=".assets/maskot-misha.svg">
-</center>
+<p align="center">
+  <img width="180" alt="mascot" src=".assets/mascot.svg">
+</p>
 
 # Misha - cli ssh client
 
