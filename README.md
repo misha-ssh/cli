@@ -1,3 +1,7 @@
+<center>
+<img alt="mascot" src=".assets/maskot-misha.svg">
+</center>
+
 # Misha - cli ssh client
 
 ![Go Report Card](https://goreportcard.com/badge/github.com/misha-ssh/cli)
