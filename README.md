@@ -24,8 +24,12 @@ Install using homebrew:
 
 ```bash
 # macOS or Linux
-brew install --cask misha
+brew install misha-ssh/tap/misha
 ```
+
+>If you get an error - ``git-credential-osxkeychain wants to access key``
+then you can refuse to provide access and continue downloading
+
 You can also install the package from the release via the [link](https://github.com/misha-ssh/cli/releases)
 
 ## 📖 Examples & Usage
