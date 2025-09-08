@@ -1,11 +1,12 @@
+# yaml-language-server: $schema=https://goreleaser.com/static/schema-pro.json
+
 version: 2
-
-env:
-  - GO111MODULE=on
-
 variables:
   main: "./cmd/misha"
   binary_name: "misha"
+
+env:
+  - GO111MODULE=on
 
 project_name: misha
 
