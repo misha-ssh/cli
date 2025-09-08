@@ -1,9 +1,4 @@
-# yaml-language-server: $schema=https://goreleaser.com/static/schema-pro.json
-
 version: 2
-variables:
-  main: "./cmd/misha"
-  binary_name: "misha"
 
 env:
   - GO111MODULE=on
@@ -13,14 +8,7 @@ project_name: misha
 before:
   hooks:
     - go mod tidy
-    - rm -rf completions
-    - mkdir completions
-    - rm -rf manpages
-    - mkdir manpages
-    - sh -c 'go run {{ with .Var.main }}{{ . }}{{ else }}.{{ end }} completion "bash" >./completions/{{ .ProjectName }}.bash'
-    - sh -c 'go run {{ with .Var.main }}{{ . }}{{ else }}.{{ end }} completion "zsh" >./completions/{{ .ProjectName }}.zsh'
-    - sh -c 'go run {{ with .Var.main }}{{ . }}{{ else }}.{{ end }} completion "fish" >./completions/{{ .ProjectName }}.fish'
-    - sh -c 'go run {{ with .Var.main }}{{ . }}{{ else }}.{{ end }} man | gzip -c >./manpages/{{ .ProjectName }}.1.gz'
+    - ./scripts/manpages.sh
 
 builds:
   - env:
@@ -93,21 +81,6 @@ homebrew_casks:
           if system_command("/usr/bin/xattr", args: ["-h"]).exit_status == 0
             system_command "/usr/bin/xattr", args: ["-dr", "com.apple.quarantine", "#{staged_path}/misha"]
           end
-
-brews:
-  - repository:
-      owner: misha-ssh
-      name: homebrew-tap
-      token: "{{ .Env.GITHUB_TOKEN }}"
-    commit_author:
-      name: deniskorbakov
-      email: korbakovd009@gmail.com
-    install: |-
-      bin.install "{{ with .Var.binary_name }}{{ . }}{{ else }}{{ .ProjectName }}{{ end }}"
-      bash_completion.install "completions/{{ .ProjectName }}.bash" => "{{ .ProjectName }}"
-      zsh_completion.install "completions/{{ .ProjectName }}.zsh" => "_{{ .ProjectName }}"
-      fish_completion.install "completions/{{ .ProjectName }}.fish"
-      man1.install "manpages/{{ .ProjectName }}.1.gz"
 
 nfpms:
   - package_name: misha
