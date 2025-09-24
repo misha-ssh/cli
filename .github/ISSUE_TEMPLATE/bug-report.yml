@@ -1,0 +1,38 @@
+name: Bug report
+description: |
+  Something didn't work as expected? Create a report to help us improve.
+labels: [ "bug", "triage" ]
+assignees: [ ]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Example description
+  - type: input
+    id: pkg_version
+    attributes:
+      label: Cli package version
+      placeholder: "example: 1.0.0"
+    validations:
+      required: true
+  - type: input
+    id: go_version
+    attributes:
+      label: Go version
+      placeholder: "example: 1.24"
+    validations:
+      required: true
+  - type: input
+    id: os_version
+    attributes:
+      label: OS name with version
+      placeholder: "example: mac os tahoe 26.0"
+    validations:
+      required: true
+  - type: textarea
+    id: what-happened
+    attributes:
+      label: What happened?
+      placeholder: I got something wrong, and so on...
+    validations:
+      required: true
