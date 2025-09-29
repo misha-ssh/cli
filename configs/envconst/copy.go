@@ -2,7 +2,7 @@ package envconst
 
 const (
 	// UseCpCmd Name cp command
-	UseCpCmd = `cp`
+	UseCpCmd = `copy`
 
 	// ShortCpCmd Short description cp command
 	ShortCpCmd = `Download|Upload file`

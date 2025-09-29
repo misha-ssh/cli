@@ -4,7 +4,7 @@ import (
 	"fmt"
 
 	"github.com/misha-ssh/cli/configs/envconst"
-	"github.com/misha-ssh/cli/internal/component/cp"
+	"github.com/misha-ssh/cli/internal/component/copy"
 	"github.com/misha-ssh/cli/internal/component/list"
 	"github.com/misha-ssh/cli/internal/component/output"
 	"github.com/misha-ssh/kernel/pkg/kernel"
@@ -27,20 +27,20 @@ var cpCmd = &cobra.Command{
 			return errNotFoundConnection
 		}
 
-		fields, err := cp.Run()
+		fields, err := copy.Run()
 		if err != nil {
 			return err
 		}
 
 		switch fields.TypeCopy {
-		case cp.Download:
+		case copy.Download:
 			err := kernel.Download(selectedConn, fields.RemoteFile, fields.LocalFile)
 			if err != nil {
 				return err
 			}
 
 			output.Success("Success download file: " + fields.LocalFile)
-		case cp.Upload:
+		case copy.Upload:
 			err := kernel.Upload(selectedConn, fields.LocalFile, fields.RemoteFile)
 			if err != nil {
 				return err

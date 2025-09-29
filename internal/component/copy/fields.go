@@ -1,4 +1,4 @@
-package cp
+package copy
 
 type TypeCopy string
 
