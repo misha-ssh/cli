@@ -47,7 +47,7 @@ var updateCmd = &cobra.Command{
 			Login:     fields.Login,
 			Address:   fields.Address,
 			Password:  fields.Password,
-			UpdatedAt: time.Now().Format("2006.01.02 15:04:05"),
+			UpdatedAt: time.Now().Format(time.RFC3339),
 			CreatedAt: selectedConn.CreatedAt,
 			Type:      connect.TypeSSH,
 			SshOptions: &connect.SshOptions{
