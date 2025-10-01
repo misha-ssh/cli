@@ -8,4 +8,6 @@ RUN echo "root:password" | chpasswd
 
 RUN echo 'PermitRootLogin yes' >> /etc/ssh/sshd_config
 
+RUN echo 'text in remote file' > remote.txt
+
 CMD ["/usr/sbin/sshd", "-D"]
