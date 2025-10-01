@@ -35,8 +35,8 @@ var createCmd = &cobra.Command{
 			Login:     fields.Login,
 			Address:   fields.Address,
 			Password:  fields.Password,
-			CreatedAt: time.Now().Format("2006.01.02 15:04:05"),
-			UpdatedAt: time.Now().Format("2006.01.02 15:04:05"),
+			CreatedAt: time.Now().Format(time.RFC3339),
+			UpdatedAt: time.Now().Format(time.RFC3339),
 			Type:      connect.TypeSSH,
 			SshOptions: &connect.SshOptions{
 				Port:       fields.Port,

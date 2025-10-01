@@ -18,7 +18,6 @@ func Run() {
 		Example: envconst.ExampleRootCmd,
 	}
 
-	// Disable default options cmd
 	cmd.Root().CompletionOptions.DisableDefaultCmd = true
 
 	cmd.AddCommand(
@@ -26,6 +25,7 @@ func Run() {
 		createCmd,
 		deleteCmd,
 		updateCmd,
+		cpCmd,
 	)
 
 	if err := fang.Execute(
