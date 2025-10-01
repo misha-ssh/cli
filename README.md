@@ -42,6 +42,12 @@ The command to connect to the remote server
 
 [![video](.assets/connect.svg)](https://asciinema.org/a/734047)
 
+### 📥 Copy
+
+The command to upload | download files
+
+[![video](.assets/copy.svg)](https://asciinema.org/a/745884)
+
 ### ✍️ Create
 
 The command to create a connection
