@@ -28,7 +28,7 @@ jobs:
         run: go mod download
 
       - name: Run GoReleaser
-        uses: goreleaser/goreleaser-action@v6
+        uses: goreleaser/goreleaser-action@v6.4.0
         with:
           distribution: goreleaser
           # GoReleaser version
