@@ -133,6 +133,19 @@ Server accesses:
 * ``password`` - password
 * ``port`` - 2222
 
+## ⌨️ Local Run
+
+The command to build app:
+
+```bash
+make build
+```
+
+Run bin file for run app:
+
+```bash
+./misha
+```
 
 ## 🧪 Testing
 
