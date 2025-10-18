@@ -28,6 +28,6 @@ go.work.sum
 .idea/
 .vscode/
 
-cmd/misha/misha
+misha
 
 manpages/
