@@ -75,6 +75,8 @@ github.com/mattn/go-runewidth v0.0.19 h1:v++JhqYnZuu5jSKrk9RbgF5v4CGUjqRfBm05byF
 github.com/mattn/go-runewidth v0.0.19/go.mod h1:XBkDxAl56ILZc9knddidhrOlY5R/pDhgLpndooCuJAs=
 github.com/misha-ssh/kernel v1.2.2 h1:dLzifVotN8v4Z86ol5UWlnLXNGww4Uk56a9ZxQB611Y=
 github.com/misha-ssh/kernel v1.2.2/go.mod h1:+4OnNQ05USiyG4cEGUZf7UkxfJA26wiRJsBmFN23YO4=
+github.com/misha-ssh/kernel v1.2.3 h1:IKYdwn+4Nvy4kcxjFvYy5anIk7y4HVSOrThOGaGxiZw=
+github.com/misha-ssh/kernel v1.2.3/go.mod h1:+4OnNQ05USiyG4cEGUZf7UkxfJA26wiRJsBmFN23YO4=
 github.com/mitchellh/hashstructure/v2 v2.0.2 h1:vGKWl0YJqUNxE8d+h8f6NJLcCJrgbhC4NcD46KavDd4=
 github.com/mitchellh/hashstructure/v2 v2.0.2/go.mod h1:MG3aRVU/N29oo/V/IhBX8GR/zz4kQkprJgF2EVszyDE=
 github.com/muesli/ansi v0.0.0-20230316100256-276c6243b2f6 h1:ZK8zHtRHOkbHy6Mmr5D264iyp3TiX5OmNcI5cIARiQI=

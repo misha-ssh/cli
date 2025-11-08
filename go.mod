@@ -6,7 +6,7 @@ require (
 	github.com/charmbracelet/fang v0.4.4
 	github.com/charmbracelet/huh v0.6.0
 	github.com/charmbracelet/lipgloss v1.0.0
-	github.com/misha-ssh/kernel v1.2.2
+	github.com/misha-ssh/kernel v1.2.3
 	github.com/spf13/cobra v1.10.1
 )
 
