@@ -3,7 +3,7 @@ package command
 import (
 	"errors"
 
-	updateForm "github.com/misha-ssh/cli/internal/component/update"
+	form "github.com/misha-ssh/cli/internal/component/update"
 
 	"github.com/misha-ssh/cli/configs/envconst"
 	"github.com/misha-ssh/cli/internal/component/list"
@@ -28,7 +28,7 @@ var updateCmd = &cobra.Command{
 			return errors.New("not found connections")
 		}
 
-		updatedConnection, err := updateForm.Run(selectedConn)
+		updatedConnection, err := form.Run(selectedConn)
 		if err != nil {
 			return errors.New("failed to update connections")
 		}

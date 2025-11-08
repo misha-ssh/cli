@@ -3,7 +3,7 @@ package command
 import (
 	"errors"
 
-	createForm "github.com/misha-ssh/cli/internal/component/create"
+	form "github.com/misha-ssh/cli/internal/component/create"
 
 	"github.com/misha-ssh/cli/configs/envconst"
 	"github.com/misha-ssh/cli/internal/component/output"
@@ -17,7 +17,7 @@ var createCmd = &cobra.Command{
 	Short: envconst.ShortCreateCmd,
 	Long:  envconst.LongCreateCmd,
 	RunE: func(cmd *cobra.Command, _ []string) error {
-		connection, err := createForm.Run()
+		connection, err := form.Run()
 		if err != nil {
 			return errors.New("error run text input")
 		}
