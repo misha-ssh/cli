@@ -84,6 +84,7 @@ func Run() (*connect.Connect, error) {
 				CurrentDirectory(homedir).
 				Validate(privateKeyValidate).
 				Value(&connection.SshOptions.PrivateKey).
+				ShowHidden(true).
 				Picking(true),
 			huh.NewInput().
 				Title("Passphrase").

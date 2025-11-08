@@ -106,6 +106,7 @@ func Run(connection *connect.Connect) (*connect.Connect, error) {
 				CurrentDirectory(homedir).
 				Validate(privateKeyValidate).
 				Value(&updatedConn.SshOptions.PrivateKey).
+				ShowHidden(true).
 				Picking(true),
 			huh.NewInput().
 				Title("Passphrase").
