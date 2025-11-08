@@ -9,6 +9,7 @@
 ![Action Lint](https://github.com/misha-ssh/cli/actions/workflows/lint.yml/badge.svg)
 ![Action Build](https://github.com/misha-ssh/cli/actions/workflows/build.yml/badge.svg)
 ![GitHub Repo stars](https://img.shields.io/github/stars/misha-ssh/cli)
+[![Wakatime](https://wakatime.com/badge/user/018b9f7a-8548-4f9d-9ebe-df3058a5bab7/project/0ba8ca36-0853-4f1a-b172-2754bd298ded.svg)](https://wakatime.com/badge/user/018b9f7a-8548-4f9d-9ebe-df3058a5bab7/project/0ba8ca36-0853-4f1a-b172-2754bd298ded)
 
 Misha - SSH client made on go
 
