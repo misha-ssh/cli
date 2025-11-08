@@ -5,6 +5,7 @@ import (
 	"github.com/misha-ssh/kernel/pkg/connect"
 	"os"
 	"strconv"
+	"time"
 
 	"github.com/charmbracelet/huh"
 )
@@ -28,7 +29,9 @@ func Run() (*connect.Connect, error) {
 		return nil, errGetHomeDir
 	}
 
-	connection := new(connect.Connect)
+	connection := &connect.Connect{
+		SshOptions: &connect.SshOptions{},
+	}
 
 	port := DefaultPort
 
@@ -100,7 +103,12 @@ func Run() (*connect.Connect, error) {
 		return nil, errConvertPort
 	}
 
+	currentTime := time.Now().Format(time.RFC3339)
+
 	connection.SshOptions.Port = intPort
+	connection.CreatedAt = currentTime
+	connection.UpdatedAt = currentTime
+	connection.Type = connect.TypeSSH
 
 	return connection, nil
 }
