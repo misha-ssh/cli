@@ -10,12 +10,6 @@ import (
 	"github.com/spf13/cobra"
 )
 
-var (
-	successDeleteConnection = "success delete connection"
-
-	errDeleteNotFoundConnection = errors.New("connection not found")
-)
-
 // deleteCmd Command for delete connection
 var deleteCmd = &cobra.Command{
 	Use:   envconst.UseDeleteCmd,
@@ -29,7 +23,7 @@ var deleteCmd = &cobra.Command{
 
 		selectedConn, err := list.Run(connections)
 		if err != nil {
-			return errDeleteNotFoundConnection
+			return errors.New("connection not found")
 		}
 
 		err = kernel.Delete(selectedConn)
@@ -37,7 +31,7 @@ var deleteCmd = &cobra.Command{
 			return err
 		}
 
-		output.Success(successDeleteConnection + " - " + selectedConn.Alias)
+		output.Success("success delete connection - ", selectedConn.Alias)
 
 		return nil
 	},

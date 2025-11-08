@@ -2,23 +2,14 @@ package command
 
 import (
 	"errors"
-	"time"
 
-	updateForm "github.com/misha-ssh/cli/internal/component/update"
+	form "github.com/misha-ssh/cli/internal/component/update"
 
 	"github.com/misha-ssh/cli/configs/envconst"
 	"github.com/misha-ssh/cli/internal/component/list"
 	"github.com/misha-ssh/cli/internal/component/output"
-	"github.com/misha-ssh/kernel/pkg/connect"
 	"github.com/misha-ssh/kernel/pkg/kernel"
 	"github.com/spf13/cobra"
-)
-
-var (
-	successUpdateConnection = "success update connection"
-
-	errNotFoundConnection = errors.New("not found connections")
-	errUpdateForm         = errors.New("failed to update connections")
 )
 
 // updateCmd Command for update create
@@ -34,26 +25,12 @@ var updateCmd = &cobra.Command{
 
 		selectedConn, err := list.Run(connections)
 		if err != nil {
-			return errNotFoundConnection
+			return errors.New("not found connections")
 		}
 
-		fields, err := updateForm.Run(selectedConn)
+		updatedConnection, err := form.Run(selectedConn)
 		if err != nil {
-			return errUpdateForm
-		}
-
-		updatedConnection := &connect.Connect{
-			Alias:     fields.Alias,
-			Login:     fields.Login,
-			Address:   fields.Address,
-			Password:  fields.Password,
-			UpdatedAt: time.Now().Format(time.RFC3339),
-			CreatedAt: selectedConn.CreatedAt,
-			Type:      connect.TypeSSH,
-			SshOptions: &connect.SshOptions{
-				Port:       fields.Port,
-				PrivateKey: fields.PrivateKey,
-			},
+			return errors.New("failed to update connections")
 		}
 
 		err = kernel.Update(updatedConnection, selectedConn.Alias)
@@ -61,7 +38,7 @@ var updateCmd = &cobra.Command{
 			return err
 		}
 
-		output.Success(successUpdateConnection + " - " + fields.Alias)
+		output.Success("success update connection - ", updatedConnection.Alias)
 
 		return nil
 	},

@@ -1,7 +1,7 @@
 package command
 
 import (
-	"fmt"
+	"errors"
 
 	"github.com/misha-ssh/cli/configs/envconst"
 	"github.com/misha-ssh/cli/internal/component/copy"
@@ -24,7 +24,7 @@ var cpCmd = &cobra.Command{
 
 		selectedConn, err := list.Run(connections)
 		if err != nil {
-			return errNotFoundConnection
+			return errors.New("connection not found")
 		}
 
 		fields, err := copy.Run()
@@ -48,7 +48,7 @@ var cpCmd = &cobra.Command{
 
 			output.Success("Success upload file: " + fields.LocalFile)
 		default:
-			return fmt.Errorf("unknown copy type: %s", fields.TypeCopy)
+			return errors.New("unknown download type")
 		}
 
 		return nil

@@ -4,6 +4,7 @@ import (
 	"errors"
 	"os"
 	"strconv"
+	"time"
 
 	"github.com/charmbracelet/huh"
 	"github.com/misha-ssh/kernel/pkg/connect"
@@ -16,7 +17,7 @@ var (
 )
 
 // Run get form for update connect.Connect
-func Run(connection *connect.Connect) (*Fields, error) {
+func Run(connection *connect.Connect) (*connect.Connect, error) {
 	var authPassConfirm bool
 	var updatedPrivateKey bool
 
@@ -38,7 +39,6 @@ func Run(connection *connect.Connect) (*Fields, error) {
 		return nil, errGetHomeDir
 	}
 
-	fields := &Fields{}
 	port := strconv.Itoa(updatedConn.SshOptions.Port)
 
 	err = huh.NewForm(
@@ -106,7 +106,13 @@ func Run(connection *connect.Connect) (*Fields, error) {
 				CurrentDirectory(homedir).
 				Validate(privateKeyValidate).
 				Value(&updatedConn.SshOptions.PrivateKey).
+				ShowHidden(true).
 				Picking(true),
+			huh.NewInput().
+				Title("Passphrase").
+				EchoMode(huh.EchoModePassword).
+				Description("Passphrase for private key (may be empty)").
+				Value(&updatedConn.SshOptions.Passphrase),
 		).WithHideFunc(func() bool {
 			if authPassConfirm {
 				return true
@@ -128,24 +134,18 @@ func Run(connection *connect.Connect) (*Fields, error) {
 		return nil, errConvertPort
 	}
 
-	fields.Alias = updatedConn.Alias
-	fields.Login = updatedConn.Login
-	fields.Address = updatedConn.Address
-	fields.Port = intPort
-	fields.Password = updatedConn.Password
-	fields.PrivateKey = updatedConn.SshOptions.PrivateKey
-
-	if hasOriginalPrivateKey && !updatedPrivateKey && !authPassConfirm {
-		fields.PrivateKey = connection.SshOptions.PrivateKey
-	}
-
-	if hasOriginalPassword && !authPassConfirm {
-		fields.Password = ""
-	}
-
-	if hasOriginalPrivateKey && authPassConfirm {
-		fields.PrivateKey = ""
-	}
-
-	return fields, nil
+	return &connect.Connect{
+		Alias:     updatedConn.Alias,
+		Login:     updatedConn.Login,
+		Address:   updatedConn.Address,
+		Password:  updatedConn.Password,
+		UpdatedAt: time.Now().Format(time.RFC3339),
+		CreatedAt: updatedConn.CreatedAt,
+		Type:      connect.TypeSSH,
+		SshOptions: &connect.SshOptions{
+			Port:       intPort,
+			PrivateKey: updatedConn.SshOptions.PrivateKey,
+			Passphrase: updatedConn.SshOptions.Passphrase,
+		},
+	}, nil
 }
