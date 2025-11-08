@@ -1,13 +1,19 @@
 package output
 
-import "github.com/charmbracelet/lipgloss"
+import (
+	"fmt"
 
-var (
-	successColor = lipgloss.Color("#04B575")
+	"github.com/charmbracelet/lipgloss"
 )
 
-// Success get message lin for success operations
-func Success(s string) {
-	style := lipgloss.NewStyle().Foreground(successColor)
-	println(style.Render(s))
+var (
+	green = lipgloss.Color("#04B575")
+)
+
+func output(colorText string) {
+	fmt.Println(colorText)
+}
+
+func Success(str ...string) {
+	output(lipgloss.NewStyle().Foreground(green).Render(str...))
 }
