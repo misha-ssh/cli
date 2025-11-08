@@ -2,6 +2,7 @@ package create
 
 import (
 	"errors"
+	"github.com/misha-ssh/kernel/pkg/connect"
 	"os"
 	"strconv"
 
@@ -19,7 +20,7 @@ var (
 )
 
 // Run Main function that runs an interactive form to collect SSH connection details
-func Run() (*Fields, error) {
+func Run() (*connect.Connect, error) {
 	var authPassConfirm bool
 
 	homedir, err := os.UserHomeDir()
@@ -27,7 +28,8 @@ func Run() (*Fields, error) {
 		return nil, errGetHomeDir
 	}
 
-	fields := &Fields{}
+	connection := new(connect.Connect)
+
 	port := DefaultPort
 
 	err = huh.NewForm(
@@ -36,19 +38,19 @@ func Run() (*Fields, error) {
 				Title("Alias").
 				Description("Unique connection name").
 				Validate(aliasValidate).
-				Value(&fields.Alias),
+				Value(&connection.Alias),
 
 			huh.NewInput().
 				Title("Login").
 				Description("Username of the remote machine").
 				Validate(huh.ValidateNotEmpty()).
-				Value(&fields.Login),
+				Value(&connection.Login),
 
 			huh.NewInput().
 				Title("Address").
 				Description("Address of the remote machine").
 				Validate(huh.ValidateNotEmpty()).
-				Value(&fields.Address),
+				Value(&connection.Address),
 
 			huh.NewInput().
 				Title("Port").
@@ -68,7 +70,7 @@ func Run() (*Fields, error) {
 				Title("Password").
 				EchoMode(huh.EchoModePassword).
 				Description("Password to connect to a remote machine").
-				Value(&fields.Password),
+				Value(&connection.Password),
 		).WithHideFunc(func() bool {
 			return !authPassConfirm
 		}),
@@ -78,8 +80,13 @@ func Run() (*Fields, error) {
 				Description("select file with private key").
 				CurrentDirectory(homedir).
 				Validate(privateKeyValidate).
-				Value(&fields.PrivateKey).
+				Value(&connection.SshOptions.PrivateKey).
 				Picking(true),
+			huh.NewInput().
+				Title("Passphrase").
+				EchoMode(huh.EchoModePassword).
+				Description("Passphrase for private key (may be empty)").
+				Value(&connection.SshOptions.Passphrase),
 		).WithHideFunc(func() bool {
 			return authPassConfirm
 		}),
@@ -93,7 +100,7 @@ func Run() (*Fields, error) {
 		return nil, errConvertPort
 	}
 
-	fields.Port = intPort
+	connection.SshOptions.Port = intPort
 
-	return fields, nil
+	return connection, nil
 }
