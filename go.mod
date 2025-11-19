@@ -5,7 +5,7 @@ go 1.24.2
 require (
 	github.com/charmbracelet/fang v0.4.4
 	github.com/charmbracelet/huh v0.6.0
-	github.com/charmbracelet/lipgloss v1.0.0
+	github.com/charmbracelet/lipgloss v1.1.0
 	github.com/misha-ssh/kernel v1.2.3
 	github.com/spf13/cobra v1.10.1
 )
@@ -21,6 +21,7 @@ require (
 	github.com/charmbracelet/colorprofile v0.3.3 // indirect
 	github.com/charmbracelet/ultraviolet v0.0.0-20251106193841-7889546fc720 // indirect
 	github.com/charmbracelet/x/ansi v0.11.0 // indirect
+	github.com/charmbracelet/x/cellbuf v0.0.13-0.20250311204145-2c3ea96c31dd // indirect
 	github.com/charmbracelet/x/exp/charmtone v0.0.0-20251107210615-3bf63bc1c0e5 // indirect
 	github.com/charmbracelet/x/exp/color v0.0.0-20251006100439-2151805163c8 // indirect
 	github.com/charmbracelet/x/exp/strings v0.0.0-20251107210615-3bf63bc1c0e5 // indirect
